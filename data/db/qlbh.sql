@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 19, 2012 at 11:28 AM
+-- Generation Time: Jun 08, 2013 at 09:15 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `freelandcer`
+-- Database: `mtxapp`
 --
 
 -- --------------------------------------------------------
@@ -1038,7 +1038,7 @@ CREATE TABLE IF NOT EXISTS `mtx_users` (
   `user_modified` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Unique` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=128 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=130 ;
 
 --
 -- Dumping data for table `mtx_users`
@@ -1050,7 +1050,8 @@ INSERT INTO `mtx_users` (`id`, `username`, `password`, `first_name`, `last_name`
 (109, 'thien.le', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', 1, '2012-02-04 08:36:34', 102, '2012-02-04 08:36:34', 102),
 (125, 'thienle', '5f4dcc3b5aa765d61d8327deb882cf99', 'Thien', 'Le', 'thien.le@gmail.com', 1, '2012-02-22 16:30:30', 102, '2012-02-22 16:30:30', 102),
 (124, 'user4', '21232f297a57a5a743894a0e4a801fc3', 'user4', 'luser4', 'user4@gmail.com', 1, '2012-02-22 16:27:15', 102, '2012-02-22 16:27:15', 102),
-(127, 'test1', '827ccb0eea8a706c4c34a16891f84e7b', 'test1', 'Thiện', 'leminhthien84@gmail.com', 1, '2012-05-19 10:56:54', 102, '2012-05-19 11:01:20', 102);
+(127, 'test1', '827ccb0eea8a706c4c34a16891f84e7b', 'test1', 'Thiện', 'leminhthien84@gmail.com', 1, '2012-05-19 10:56:54', 102, '2012-05-19 11:01:20', 102),
+(129, 'test', '', NULL, NULL, NULL, NULL, '2012-05-26 15:52:10', NULL, NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

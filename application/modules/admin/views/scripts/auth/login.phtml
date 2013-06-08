@@ -6,16 +6,12 @@
         bodyStyle: 'padding:15px;background:transparent',
         border: false,
         items: [
-            { xtype: 'box', autoEl: { tag: 'div',
-                    html: '<div class="app-msg"><img src="img/magic-wand.png" class="app-img" />Log in to The Magic Forum</div>'
-                }
+            { xtype: 'textfield', id: 'username', fieldLabel: '<?php echo $this->translate('Username');?>',
+                allowBlank: false, minLength: 3, maxLength: 32, width: 200
             },
-            { xtype: 'textfield', id: 'username', fieldLabel: 'Username',
-                allowBlank: false, minLength: 3, maxLength: 32
-            },
-            { xtype: 'textfield', id: 'password', fieldLabel: 'Password', inputType: 'password',
-                allowBlank: false, minLength: 3, maxLength: 32,
-                minLengthText: 'Password must be at least 6 characters long.'
+            { xtype: 'textfield', id: 'password', fieldLabel: '<?php echo $this->translate('Password');?>', inputType: 'password',
+                allowBlank: false, minLength: 3, maxLength: 32, width: 200,
+                minLengthText: '<?php echo $this->translate('Password must be at least 6 characters long');?>'
             }
         ],
         buttons: [{
@@ -23,21 +19,15 @@
                 handler: function() {
                     Ext.getCmp('login-form').getForm().submit(
                     {
-                        url: '',
-                        waitMsg: 'Submitting your data...',
+                        waitMsg: '<?php echo $this->translate('Submitting your data...');?>',
                         success: function(form, action){
-                            window.location.href = 'http://local.mtxapp/admin'
+                            window.location.href = 'http://local.qlbh/admin'
                         },
                         failure: function(form, action){
                             alert('Fail');
                         }
                     }
                 );
-                }
-            }, {
-                text: 'Cancel',
-                handler: function() {
-                    win.hide();
                 }
             }]
     }
@@ -47,9 +37,12 @@
         win = new Ext.Window({
             applyTo: 'login-win',
             layout: 'form',
-            width: 340,
+            title: 'Login Form',
+            draggable: false,
+            resizable: false,
+            width: 350,
             autoHeight: true,
-            closeAction: 'hide',
+            closable: false,
             errorReader: new Ext.data.JsonReader(),
             items: [loginForm]
 
