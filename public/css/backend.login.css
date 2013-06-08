@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+.loginArea {
+	height: auto;
+	margin: 220px auto auto;
+	width: 400px;
+	border: 2px solid #00A803;
+}
+
+. head
+{
+	margin-bottom: 10px;	
+}
+
+.logo {
+	background: url(../images/logo.jpg) no-repeat;
+	height: 50px;
+	display: block;
+	margin-top: 5px;
+}
+
+.version {
+	float: right;
+	font-size: 14px;
+	margin: auto;
+	margin-right: 10px;
+	margin-top: -36px;
+}
+
+.loginForm {
+    background: none repeat scroll 0 0 #D1D1D1;
+    margin: auto auto 10px;
+    width: 300px;
+}
+
+.loginForm table {margin-top: 5px;}
+
+.errorMsg
+{
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #FF0000;
+	width: 300px;
+	margin: auto auto 10px;
+	font-weight: bold;
+	padding: 5px 0 5px 0;
+}

@@ -1,0 +1,90 @@
+<?php
+	echo $this->headTitle($this->translate("Admin - Adding module.")); 
+?>
+<script type="text/javascript">
+$(document).ready(function() {
+		
+	// validate signup form on keyup and submit
+	$("#module").validate({
+		rules: {
+			title: {
+				required : true
+			},
+		},
+		messages: {
+			name: {
+				required: "<?php echo $this->translate('Name is not empty.')?>",
+			},
+		}
+	});
+});
+</script>
+<form name="module" id="module"  method="POST" enctype="multipart/form-data">
+<h2 class="formtitle"><?php echo $this->translate('Adding module')?></h2>
+<table cellpadding="2" cellspacing="2" class="form" width="100%">
+	<?php
+		if (!empty($this->messages['success']) && is_array($this->messages['success']) && count($this->messages['success']) > 0) {
+	?>
+		<tr>
+			<th align="left" colspan="9" class="success_box">
+				<?php
+					foreach ($this->messages['success'] as $msg) {
+						echo $msg . "<br />";
+					}
+				?>
+			</th>
+		</tr>
+	<?php		
+		}
+	?>
+	<?php
+		if (!empty($this->messages['error']) && is_array($this->messages['error']) && count($this->messages['error']) > 0) {
+	?>
+		<tr>
+			<th align="left" colspan="9" class="error_box">
+				<?php
+					foreach ($this->messages['error'] as $msg) {
+						echo $msg . "<br />";
+					}
+				?>
+			</th>
+		</tr>
+	<?php		
+		}
+	?>
+	
+
+<tr>
+	<th align="left">
+		<?php echo $this->translate('Name');?>
+	</th>
+	<td>
+		<?php
+			echo $this->form->name;
+		?>
+	</td>
+</tr>
+
+<tr>
+	<th align="left">
+		<?php echo $this->translate('Status');?>
+	</th>
+	<td>
+		<?php
+			echo $this->form->status;
+		?>
+	</td>
+</tr>
+
+<tr>
+	<td>
+		&nbsp;
+	</td>
+	<td>
+		<input type="submit" name="save" value="<?php echo $this->translate('Save')?>" class="button">
+		&nbsp;
+		<input type="reset" name="cancel" value="<?php echo $this->translate('Cancel')?>" class="button" onclick="window.location='<?php echo $this->url(array('module' => 'admin', 'controller' => 'acl', 'action' => 'add-module'), 'default', true);?>';">
+	</td>
+</tr>
+</table>
+</form>

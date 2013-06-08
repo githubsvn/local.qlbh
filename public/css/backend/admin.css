@@ -1,0 +1,194 @@
+/*** Global Ajax ****/
+.loadinglayer{
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:2000;
+	position:absolute;
+	/*opacity:0.8;
+	background-color:#999;*/
+}
+.loadinglayer div{
+	width:180px;
+	height:35px;
+	position:relative;
+	border:1px solid #333;
+	background-color:#111;
+	z-index:2001;
+	margin:0 auto;
+	padding:10px 0 0 10px;
+	color:#FFF;
+	font-size:13px;
+}
+
+/* Tab menu*/
+.grey #waxcontainer{position:relative;height:48px;background:#E3E3E3;width:100%;font-family:"Trebuchet MS",Arial,Verdana,Helvitica,sans-serif;}
+.grey #waxnav{position:relative;height:25px;font-size:11px;font-weight:bold;background:#fff url(../images/admin/greywax_bottom.gif) repeat-x bottom left;}
+.grey #waxnav ul{margin:0px;padding:0 0 4px 0;list-style-type:none;width:auto;float:right;}
+.grey #waxnav ul li{display:block;float:left;margin:0 1px;}
+.grey #waxnav ul li a{display:block;float:left;color:#414141;text-decoration:none;padding:0 0 0 12px;height:21px;line-height:195%;}
+.grey #waxnav ul li a span{padding:0 12px 0 0;}
+.grey #waxnav ul li a:hover,.grey #waxnav ul li a.current{color:#fff;background:#575757 url(../images/admin/greywax_navtopleft.gif) no-repeat top left;}
+.grey #waxnav ul li a:hover span,.grey #waxnav ul li a.current span{display:block;width:auto;background:#575757 url(../images/admin/greywax_navtopright.gif) no-repeat top right;}
+
+html{
+		height:100%;
+		margin-top:5px;
+		margin-top:3px;
+	}
+body{	
+	height:100%;
+	margin:0px;
+	padding:0px;
+	font-family: Arial;
+	font-size:12px;
+}
+#logo{color:#C4C4C4; font-size:36px;}
+.footer{background-color:#F3F3F3; border:1px solid #CCC; border-right:0; text-align:center; font-family:arial; font-size:12px;padding:5px 0; clear:both;}
+.rowTop{background-color:#F3F3F3; border:1px solid #CCC; border-right:0; font-size:11px;padding:2px 0;}
+.textGrey{ color:#999;}
+#leftcol{
+	width:18%;
+	float:left;
+	height:100%;
+	background-color:#E3E3E3;
+}
+
+#contentcol{	/* Normal text content */
+	float:left;	/* Firefox - to avoid blank white space above panel */
+	padding-left:10px;	/* A little space at the left */
+	border-left:1px solid #999;
+	border-top:1px solid #999;
+	height:100%;
+	width:81%;
+}
+
+/******* Form *******/
+table.form {border:1px solid #CCC; background-color:#F3F3F3;}
+.form td{font-size:12px;}
+
+/********** Grid View ***********/
+table.grid {border:1px solid #C9CBD3;}
+.grid tr:hover td{background-color:#D4D4D4;}
+.grid th{font-family:arial; font-size:11px; font-weight:bold; height:22px; background:url(../images/admin/greywax_bottom.gif) left top repeat-x;background-color:#E3E3E3; border-bottom:1px solid #999}
+.grid td{font-size:12px; background-color:#F7F7F7}
+.grid td a{text-decoration:none; color:#333}
+.grid td a:hover{text-decoration:underline;}
+
+h2.formtitle {margin:0; margin-top:5px; margin-bottom:2px; font-size:16px; background:url(../images/admin/h3Arrow.gif) left 5px no-repeat; padding-left:15px; color:#888}
+
+/********* pagination **********/
+.pagination{font-size:9pt;}
+.pagination a{text-decoration:none; color:#333}
+.pagination a:hover{text-decoration:underline; color:#FF0000;}
+.pagination .disabled{color:#999;}
+
+.button {
+	border-style : solid;
+	border-top : solid 1px #d5d5d5;
+	border-right : solid 1px #808080;
+	border-bottom : solid 1px #808080;
+	border-left : solid 1px #d5d5d5;
+	color : #333333;
+	font-family : verdana, Helvetica, sans-serif;
+	font-style : normal;
+	font-weight : normal;
+	font-size : 11px;
+    background-color: #F3F3F3;
+}
+
+/****** Validator *******/
+input.error,textarea.error { border: 1px solid red; width: auto; }
+select.error { border:1px solid red;}
+label.error {
+	/*background: url('../images/icons/unchecked.gif') no-repeat;
+	padding-left: 16px;*/
+	margin-left: .3em;
+	font-size:10px;
+	color:#FF0000;
+}
+label.valid {
+	/*background: url('../images/icons/checked.gif') no-repeat;*/
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+.error_box{font-size:13px;color:#FF0000; background-color:#FFFFFF; border:1px solid #FF3300;padding:3px;}
+.success_box{font-size:13px;color:#3A6EA5; background-color:#FFFFFF; border:1px solid #3A6EA5;padding:3px;}
+/****** End Validator *******/
+
+/********** Main menu ***********/
+table.menu {border:1px solid #CCC;}
+.menu tr:hover td{background-color:#CCC;}
+.menu th{font-family:arial; font-size:12px; font-weight:bold; height:22px; background:url(../images/admin/greywax_bottom.gif) left top repeat-x;background-color:#E3E3E3; border-bottom:1px solid #999}
+.menu td{font-size:12px; background-color:#F8F8F8; height:23px;}
+.menu td a{text-decoration:none; color:#333; background-image:url(../images/admin/h_nut.gif) left top no-repeat; padding-left:12px;}
+.menu td a:hover{text-decoration:underline;}
+
+
+.required{color:#FF0000;}
+input[type="text"]{font-size:12px; font-family:arial;}
+input.lotterynumber{ width:70px; font-size:11px;}
+.date img {padding-left:3px;}
+.msgbox{font-size:12px;color:#FF0000; background-color:#FFFF33; border:1px solid #FF3300;padding:3px;}
+
+
+.header4 {
+	color : #FF6600;
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 14px;
+	font-weight : bold;
+}
+.menudottedline {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: dashed;
+	border-top-color: #CCCCCC;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+	border-left-color: #CCCCCC;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+}
+.inputbox {
+	border : 1px solid #999999;
+	color : #333333;
+	background : #FFFFFF;
+	font-family : Verdana, Helvetica, sans-serif;
+	font-size : 10px;
+	font-weight : normal;
+	z-index : -3;
+}
+
+.error{
+table.view {border:0px solid #CCC;}
+font-family : Verdana, Helvetica, sans-serif;
+	font-size : 12px;
+	font-weight : bold;
+	color : red;
+}
+
+.notice{
+	font-family : Verdana, Helvetica, sans-serif;
+	font-size : 12px;
+	font-weight : bold;
+	color : blue;
+}
+
+table.view {border:1px solid #CCC;}
+.theirstable.view td{border:1px solid #999;}
+table.view td.label{background-color:#F3F3F3; font-weight:bold;}
+a{text-decoration:none; color:#333;}
+a:hover{ text-decoration:underline;}
+img.delete{ cursor:pointer;}
+a:hover{ text-decoration:underline;}
+
+.red_dot{
+	font-weight : bold;
+	color : red;
+}

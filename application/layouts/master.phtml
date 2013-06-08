@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	<?php  
+    echo $this->headTitle();
+    echo $this->headMeta();
+    echo $this->headLink(); 
+    echo $this->headStyle();
+    echo $this->headScript();
+    ?>
+    </head>
+	<body>
+		<div class="main">
+			<!-- Header -->
+			<div class="header">
+				<?php echo $this->layout()->language; ?>
+				<?php echo $this->layout()->banner; ?>
+				<?php echo $this->layout()->navigator; ?>
+				<?php echo $this->layout()->search; ?>
+			</div>
+			<!-- Container -->
+			<div class="container">
+				<!-- Left -->
+				<div class="colleft">
+					<!-- Categories list -->
+					<?php echo $this->layout()->leftcategories; ?>
+				</div>
+				<!-- Middle -->
+				<div class="colmid">
+				<?php echo $this->layout()->breadcrumb; ?>
+				<?php echo $this->layout()->content; ?>
+				</div>
+				<!-- Right -->
+				<div class="colright">
+				</div>
+				<br class="clear" />
+			</div>
+			<!-- Header -->
+			<?php echo $this->layout()->footer; ?>
+		</div>
+	</body>
+</html>

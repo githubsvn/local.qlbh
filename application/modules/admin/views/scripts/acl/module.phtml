@@ -1,0 +1,166 @@
+<script>
+if(typeof showHideMenu =='function')
+{
+	var iconObj=document.getElementById('showHideHandle');	
+	showHideMenu(iconObj,'leftMenu');
+}	
+</script>
+<script>
+	function deleteRecord(f)
+	{
+		if(!hasCheckedOne(f.name, 'chk[]'))
+		{
+			alert('<?php echo $this->translate('msg_select_record');?>');
+			return;
+		}else{
+			//f.submit();
+		}
+	}
+	
+	function activeRecord(f, url)
+	{
+		if(!hasCheckedOne(f.name, 'chk[]'))
+		{
+			alert('<?php echo $this->translate('msg_select_record');?>');
+			return;
+		}else{
+			f.action = url;
+			alert(f.action);
+			//f.submit();
+		}
+		
+	}
+	function unactiveRecord(f, url)
+	{
+		if(!hasCheckedOne(f.name, 'chk[]'))
+		{
+			alert('<?php echo $this->translate('msg_select_record');?>');
+			return;
+		}else{
+			f.action = url;
+			alert(f.action);
+			//f.submit();
+		}
+	}
+	
+	function actionRecord(f, task)
+	{
+		if(!hasCheckedOne(f.name, 'chk[]'))
+		{
+			alert('<?php echo $this->translate('msg_select_record');?>');
+			return;
+		}else{
+			f.task.value = task;
+			f.submit();
+		}
+	}
+</script>
+<h2 class="formtitle"><?php echo $this->translate('Module search')?></h2>
+<form method="post" name="form1" id="form1">
+<input type="hidden" name="task" value="" />
+<input type="hidden" name="action" value="" />
+<table class="form" width="100%" cellpadding="2" cellspacing="1" border="0">
+	<tr>
+		<td>
+			<?php echo $this->translate('Name');?> : <input class="inputbox" type="text" name="name" value="<?php echo $this->escape(@$this->dtSearch['name'])?>" size="50"/>
+		</td>
+		<td align="right">
+            <?php echo $this->translate('Language');?>
+			<?php //echo $this->getOptionLang($this->escape(@$this->data['lang']));?>
+            
+			<?php echo $this->translate('Status');?>
+			<?php //echo $this->getOptionStatus($this->escape(@$this->data['status']));?>
+		</td>
+		<td align="right" width="90">
+			<input type="submit" value="<?php echo $this->translate('Search');?>" name="btnSearch" class="button" />
+		</td>
+	</tr>
+</table>
+</form>
+
+
+<h2 class="formtitle"><?php echo $this->translate('Module List');?></h2>
+<table cellpadding="0" cellspacing="0" width="100%">
+<?php
+		if (!empty($this->messages['success']) && is_array($this->messages['success']) && count($this->messages['success']) > 0) {
+	?>
+		<tr>
+			<th align="left" colspan="9" class="success_box">
+				<?php
+					foreach ($this->messages['success'] as $msg) {
+						echo $msg . "<br />";
+					}
+				?>
+			</th>
+		</tr>
+	<?php		
+		}
+	?>
+	<?php
+		if (!empty($this->messages['error']) && is_array($this->messages['error']) && count($this->messages['error']) > 0) {
+	?>
+		<tr>
+			<th align="left" colspan="9" class="error_box">
+				<?php
+					foreach ($this->messages['error'] as $msg) {
+						echo $msg . "<br />";
+					}
+				?>
+			</th>
+		</tr>
+	<?php		
+		}
+	?>
+</table>
+
+<form name="form1" id="form1" method="POST" >
+<input type="hidden" name="task" value="" />
+<input type="hidden" name="action" value="" />
+<table class="grid" width="100%" cellpadding="2" cellspacing="1">
+	<tr>
+		<td colspan="9">
+			<input class="button" type="button" name="add" id="add" value="<?php echo $this->translate('Add');?>" onclick="window.location='<?php echo $this->url(array('module' => 'admin', 'controller' => 'acl', 'action' => 'add-module'), 'default', true);?>'">
+			<input class="button" type="button" name="delete" id="delete" value="<?php echo $this->translate('Delete');?>" onclick="actionRecord(this.form, 'delete');">
+			<input class="button" type="button" name="active" id="active" value="<?php echo $this->translate('Active');?>" onclick="actionRecord(this.form,'active');">
+			<input class="button" type="button" name="unactive" id="unactive" value="<?php echo $this->translate('Unactive');?>" onclick="actionRecord(this.form,'unactive');">
+		</td>
+	</tr>
+	<tr>
+		<th width="30"><input type="checkbox" name="chkall" onclick="doCheckAll('form1',this.checked,'chk[]');"></th>
+		<th width="40"><?php echo $this->translate('Order');?></th>
+		<th width="50"><?php echo $this->translate('Id');?></th>
+		<th><?php echo $this->translate('Name');?></th>
+		<th width="150"><?php echo $this->translate('Stauts');?></th>	
+	</tr>
+<?php if($this->rows):?>
+<?php
+	$i = 1;
+	$i = ($this->page > 1) ? ($this->page - 1) * $this->itemPerPage : 0;
+?>
+<?php foreach($this->rows as $k=>$row) :?>
+	<tr>
+		<td align="center">
+			<input value="<?php echo $row['acl_module_id']?>" type="checkbox" name="chk[]" onclick="monitorCheckAll('form1','chk[]','chkall');">
+		</td>
+		<td align="center"><?php echo ++$i; ?></td>
+		<td align="center"><?php echo $row['acl_module_id'];?></td>
+		<td align="center"><?php echo $row['acl_module_name'];?></td>
+		<td align="center"><?php echo $row['status'];?></td>
+	</tr>
+<?php endforeach; ?>
+<?php endif;?>
+<tr>
+		<td colspan="5">
+			<input class="button" type="button" name="add" id="add" value="<?php echo $this->translate('Add');?>" onclick="window.location='<?php echo $this->url(array('module' => 'admin', 'controller' => 'acl', 'action' => 'add-module'), 'default', true);?>'">
+			<input class="button" type="button" name="delete" id="delete" value="<?php echo $this->translate('Delete');?>" onclick="actionRecord(this.form, 'delete');">
+			<input class="button" type="button" name="active" id="active" value="<?php echo $this->translate('Active');?>" onclick="actionRecord(this.form,'active');">
+			<input class="button" type="button" name="unactive" id="unactive" value="<?php echo $this->translate('Unactive');?>" onclick="actionRecord(this.form,'unactive');">
+		</td>
+	</tr>
+</table>
+</form>
+<?php if (count($this->total) != 0 && ($this->total > $this->item_per_page)) {
+    echo $this->pagination($this->pagination_config)->create_links();
+}
+?>
+<?php //echo $this->paginationControl($this->rows, 'Elastic', 'paginator.phtml'); ?>

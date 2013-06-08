@@ -1,0 +1,186 @@
+<h2><?php
+echo $this->translate("Label Managerment");
+?></h2>
+
+<form id="frmLabelManagement" name="frmLabelManagement" method="post" action="/language/manager/">
+        <div class="lstLabel">
+        <ul class="lstSelect">
+            <?php
+                if($this->multirole == 1){
+            ?>
+            <li><label class="name"><?php echo $this->translate('Module')?></label>
+            <span class="value"> <?php 
+            $this->role_id = !empty($this->role_id) ? $this->role_id : $this->guestrole;
+            echo $this->getOptRole($this->role_id);
+            ?> </span></li>
+            <?php 
+                }else{
+            ?>
+                <input type="hidden" name="role_id" value="<?php echo $this->guestrole; ?>" />
+            <?php                 	
+                } 
+            ?>
+             <?php
+            $this->action_id = !empty($this->action_id) ? $this->action_id : 0;
+            $opt = $this->getOptAction($this->action_id, $this->role_id);
+            if($opt) {
+            ?>
+            	<li><label class="name"><?php echo $this->translate('Action')?></label>
+            	<span class="value"><?php echo $opt; ?></span></li>
+            <?php } ?> 
+            <li><label class="name"><?php echo $this->translate('Language')?></label>
+            <span class="value"> <?php
+            $this->lang_key = !empty($this->lang_key) ? $this->lang_key : '';
+            echo $this->getOptLangKey($this->lang_key, $this->role_id);
+            ?> </span></li>
+        </ul>
+        <div class="lstViewAdm">
+        <?php
+            $url1 = $this->url(
+                            array('module' => 'language',
+                                'controller' => 'manager',
+                                'action' => 'index',
+                                'role_id' => $this->role_id,
+                                'lang_key' => $this->lang_key),
+                            'default', 
+                            true);
+            $url2 = $this->url(
+                            array('module' => 'language',
+                                'controller' => 'manager',
+                                'action' => 'index',
+                                'role_id' => $this->role_id,
+                                'lang_key' => $this->lang_key,
+                                'sort' => 'action'),
+                            'default', 
+                            true);
+            $url3 = $this->url(
+                            array('module' => 'language',
+                                'controller' => 'manager',
+                                'action' => 'index',
+                                'role_id' => $this->role_id,
+                                'lang_key' => $this->lang_key,
+                                'sort' => 'default_text'),
+                            'default', 
+                            true);
+            $url4 = $this->url(
+                            array('module' => 'language',
+                                'controller' => 'manager',
+                                'action' => 'index',
+                                'role_id' => $this->role_id,
+                                'lang_key' => $this->lang_key,
+                                'sort' => 'translate_text'),
+                            'default', 
+                            true);                              
+        ?>
+        <ul class="listGrid listTitle">
+            <li class="cell01"><input type="checkbox" name="chkall" id="chkall" /></li>								
+            <li class="cell01"><a href="<?php echo $url1; ?>"><?php echo $this->translate('Id');?></a></li>
+            <li class="cell02"><a href="<?php echo $url2; ?>"><?php echo $this->translate('Action');?></a></li>
+            <li class="cell03"><a href="<?php echo $url3; ?>"><?php echo $this->translate('Original Text');?></a></li>
+            <li class="cell04"><a href="<?php echo $url4; ?>"><?php echo $this->translate('Translated Text');?></a></li>
+        </ul>
+            <?php
+            $datas = $this->datas;
+            if(!empty($datas)){
+                $i = 1;
+                foreach($datas as $rows){
+                    $css = "";
+                    if( ($i%2) == 0){
+                        $css = "listGrid";
+                    }else{
+                        $css = "listGrid";
+                    }
+                    //calulate for NO.
+                    if(!empty($this->page) && $this->page == 1){
+                        $no = $i;
+                    }else{
+                        $no = ($this->item_per_page * ($this->page - 1) ) + $i;
+                    }
+                    $rows['translate_text'] 	= !empty($rows['translate_text']) ? stripslashes($rows['translate_text']) : '';
+                    $rows['translate_text'] 	= str_replace("\"", htmlentities("\""), $rows['translate_text']);
+                    $rows['translate_text'] 	= str_replace("'", htmlentities("'"), $rows['translate_text']);
+                    $rows['default_text'] 		= !empty($rows['default_text']) ? stripslashes($rows['default_text']) : '';
+                    $rows['default_text'] 		= str_replace("\"", htmlentities("\""), $rows['default_text']);
+                    $rows['default_text'] 		= str_replace("'", htmlentities("'"), $rows['default_text']);
+                    ?>
+        <ul class="<?php echo $css;?>">
+            <li class="cell01">
+                <input type="checkbox" name="chkIds[]" id="chkIds[]" value="<?php echo !empty($rows['id']) ? $rows['id']: '';?>"/></li>								
+            <li class="cell01">
+                <?php echo $no?>
+                <input type="hidden" name="ids[]" id="ids[]" value="<?php echo !empty($rows['id']) ? $rows['id']: '';?>" />
+                <input type="hidden" name="actions[]" id="actions[]" value="<?php echo !empty($rows['action']) ? $rows['action']: '';?>" />
+                <input type="hidden" name="id_muls[]" id="id_muls[]" value="<?php echo !empty($rows['id_mul']) ? $rows['id_mul']: '';?>" />
+            </li>
+            <li class="cell02"><?php echo $this->convertToLangKey($rows['action'])?></li>
+            <li class="cell03"><input type="text" name="default_text[]"
+                id="default_text[]" value="<?php echo $rows['default_text']?>" /></li>
+            <li class="cell04"><input type="text" name="translate_text[]"
+                id="translate_text[]" value="<?php echo $rows['translate_text']?>" /></li>
+        </ul>
+                    <?php
+                    $i ++;
+                }
+            }
+            ?></div><!--end lstViewAdm-->
+           
+              <ul class="listBtns">
+                  <li><a class="btnDetele" href="#"
+                      title="<?php echo $this->translate('Delete')?>" onclick="javascript:document.frmLabelManagement.action='/language/manager/delete-label'; javascript:document.frmLabelManagement.submit();"><?php echo $this->translate('Delete')?></a></li>
+                  <li><a class="btnUpdate" href="#"
+                      title="<?php echo $this->translate('Save')?>" onclick="javascript:document.frmLabelManagement.action='/language/manager/save-label'; javascript:document.frmLabelManagement.submit();"><?php echo $this->translate('Save')?></a></li>
+                  <li><a class="btnAddnew addLabel" href="#"
+                      title="<?php echo $this->translate('Add new')?>" href="#"><?php echo $this->translate('Add new')?></a></li>
+                  <li><a class="btnGenerate" href="#"
+                      title="<?php echo $this->translate('Generate ini file')?>"
+                      onclick="javascript:document.frmLabelManagement.action='/language/manager/generate-ini'; javascript:document.frmLabelManagement.submit();"><?php echo $this->translate('Generate ini file')?></a></li>
+              </ul>
+     
+        </div>
+        
+        </div>
+        
+        </div>
+        </form>
+        
+        <div id="addLabel" class="wrapPopupRndBox wrapPopupRndGBox popup02">
+        <div class="rndPopupBox">
+        <div class="rnd topLeft">&nbsp;</div>
+        <div class="rnd topRight">&nbsp;</div>
+        <div class="rnd bottomLeft">&nbsp;</div>
+        <div class="rnd bottomRight">&nbsp;</div>
+        <div class="rnd topM">&nbsp;</div>
+        <div class="rnd bottomM">&nbsp;</div>
+        <div class="rnd leftM">&nbsp;</div>
+        <div class="rnd rightM">&nbsp;</div>
+        <div class="content"><a href="javascript:void(0);" title="Close" class="btnClose"><img src="/images/dummy.gif" alt="Close" class="uiIcon initIconClose" /></a>
+        <form class="frmAddLabel" id="frmAddLabel" name="frmAddLabel" action="<?php echo $this->baseUrl().'/language/manager/add-label'?>">
+        <h2><?php echo $this->translate('Add new Label')?></h2>
+        <div class="contPop">
+                        <ul class="lstInpt">   
+                            <li>
+                                <label for="txtCode" class="wthSelcType7"><?php echo $this->translate('Original Text')?></label>
+                                <input type="text" name="default_text" id="default_text" class="cell16"/>
+                            </li>
+                            <li>
+                                <label for="txtLabel" class="wthSelcType7"><?php echo $this->translate('Translated Text')?></label>
+                                <input type="text" name="translate_text"	id="translate_text" class="cell16"/>
+                            </li>
+                            <li class="lstBtn">
+                                <a title="<?php echo $this->translate('Add')?>" class="uiBtn uiBtn-2" href="javascript:document.frmAddLabel.submit();" id="btnSave"><span><span><?php echo $this->translate('Add')?></span></span></a>
+                            </li>
+                        </ul>
+        <input type="hidden" name="action_id" value="<?php echo $this->action_id?>" />
+        &nbsp; 
+        <input type="hidden" name="role_id" value="<?php echo $this->role_id?>" /> 
+            <input type="hidden" name="lang_key" value="<?php echo $this->lang_key?>" /></div>
+        <!--end hlInterviewAdm-->
+        
+        <div class="hightlightMain hightlightMain02"><span
+            class="rnd bottomLeft">&nbsp;</span><span class="rnd bottomRight">&nbsp;</span>
+        <div class="blockPagging">
+       
+</form>
+</div>
+</div>
+</div>

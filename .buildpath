@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="application"/>
+	<buildpathentry kind="src" path="libraries/Bisna/Application/Container"/>
+	<buildpathentry kind="src" path="libraries/Bisna/Application/Exception"/>
+	<buildpathentry kind="src" path="libraries/Bisna/Application/Resource"/>
+	<buildpathentry kind="src" path="libraries/Doctrine/Common"/>
+	<buildpathentry kind="src" path="libraries/Doctrine/DBAL"/>
+	<buildpathentry kind="src" path="libraries/Doctrine/ORM"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/LargeCollections"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/Locking"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/Paginate"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/Phing/Task"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/PHPUnit"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/Query"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/Types"/>
+	<buildpathentry kind="src" path="libraries/DoctrineExtensions/Versionable"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Acl"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Admin/Controller"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Application/Resource"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Auth/Storage"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Controller"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/DAL/Entity"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Filesystem"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/Soap"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/View/Form"/>
+	<buildpathentry kind="src" path="libraries/MTxCore/View/Helper"/>
+	<buildpathentry kind="src" path="libraries/MTxEntity/DAL/Entity"/>
+	<buildpathentry kind="src" path="libraries/PhpThumb"/>
+	<buildpathentry kind="src" path="libraries/Zend"/>
+	<buildpathentry kind="src" path="libraries/ZendX"/>
+	<buildpathentry kind="src" path="public"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

@@ -1,0 +1,259 @@
+<h2>
+<?php 
+	echo $this->translate('Administrator Language');
+?></h2>
+
+<form id="frmAdmLanguage" name="frmAdmLanguage" method="post" action="">
+<div class="lstAdmLang"><?php
+$datas 		= $this->datas;
+if(is_array($datas) && count($datas) > 0){
+	foreach($datas as $data){
+		$langKeys 	= array();
+		?>
+<div class="lstViewAdm">
+<h4><?php echo !empty($data[0]['role_name']) ? $data[0]['role_name'] : 'Admin';?></h4>
+<ul class="listGrid listTitle">
+	<li class="cell01">Chosen languages</li>
+	<li class="cell02">Translated</li>
+	<li class="cell03">Translated date</li>
+	<li class="cell04">Manage</li>
+	<li class="cell05">Default</li>
+	<li class="cell06">Actions</li>
+</ul>
+		<?php
+		$i = 1;
+		foreach($data as $value){
+			$css = "";
+			if( ($i%2) == 0){
+				$css = "listGrid";
+			}else{
+				$css = "listGrid";
+			}
+			$status = '';
+			if(!empty($value['translated']) && $value['translated'] == 1){
+				$status = 'New';
+			}elseif(!empty($value['translated']) && $value['translated'] == 2){
+				$status = 'Imported';
+			}
+			$urlExport 		= $this->url(array('module' => 'language', 'controller' => 'admin', 'action' => 'export', 'id' => $value['id'], 'langName' => $value['country_name']));
+			$urlImport 		= $this->url(array('module' => 'language', 'controller' => 'admin', 'action' => 'import', 'id' => $value['id']));
+			$urlDetele 		= $this->url(array('module' => 'language', 'controller' => 'admin', 'action' => 'delete', 'id' => $value['id']));
+			$urlEdit 		= $this->url(array('module' => 'language', 'controller' => 'admin', 'action' => 'add', 'id' => $value['id'], 'roleId' => $value['role_id']));
+			$urlPublish		= $this->url(array('module' => 'language', 'controller' => 'admin', 'action' => 'change-status', 'id' => $value['id'], 'status' => '2'));
+			$urlUnpublish	= $this->url(array('module' => 'language', 'controller' => 'admin', 'action' => 'change-status', 'id' => $value['id'], 'status' => '3'));
+			$langKeys[]		= !empty($value['lang_key']) ? $value['lang_key'] : '';
+			?>
+<ul class="<?php echo $css?>">
+	<li class="cell01"><?php echo !empty($value['country_name']) ? $value['country_name'] : '';?></li>
+	<li class="cell02"><?php echo $status?></li>
+	<li class="cell03"><?php echo $this->mySQLDate()->formatForMySQLDate($value['translated_date'], "d/m/Y")?></li>
+	<li class="cell04">
+		<a href="<?php echo $urlImport?>" title="Import"
+		class="action import" rel="<?php echo $value['id']; ?>">Import</a> 
+		|<a href="<?php echo $urlExport?>"
+		title="Export" class="action">Export</a></li>
+	<li class="cell05"><input onclick="processCheckDefault(this,'<?php echo $value['id']?>', '<?php echo $value['role_id']?>',event);" type="checkbox" name="chkDefault1"
+		id="chkDefault1"
+		<?php echo (!empty($value['default']) && $value['default'] == 1) ? 'checked' : '';?> />
+	</li>
+	<li class="cell06"><?php
+	if(!empty($value['default']) && $value['default'] != 1){	//$value['default'] = 1 : translated
+		?> <a onclick="submitActionFrm(this, event)" href="<?php echo $urlDetele;?>" title="Delete" class="action">
+			<img src="/images/dummy.gif" alt="Delete" class="uiIcon initIconDelete">
+			</a>
+	| <?php 
+	}
+	?><!-- <a class="action" rel="<?php echo $value['role_id']; ?>"
+		onclick="return processLanguage(this,'<?php echo $value['country_name']; ?>','<?php echo $value['lang_key']; ?>', true);"
+		href="<?php echo $urlEdit?>" title="Edit language name">Edit language
+	name</a> | --><?php
+	if(!empty($value['default']) && $value['default'] != 1){ //$value['default'] = 2 : publish
+		if($value['default'] == 2){
+		?> <a href="<?php echo $urlUnpublish?>" title="Unpublish"
+		class="action">
+			<img src="/images/dummy.gif" alt="Unpublish" class="uiIcon initIcon-62" />
+			</a> <?php 
+		}
+	}
+	?> <?php
+	if(!empty($value['default']) && $value['default'] != 1){ ///$value['default'] = 3 : unpublish
+		if($value['default'] == 3){
+		?> <a href="<?php echo $urlPublish?>" title="publish" class="action">
+		<img src="/images/dummy.gif" alt="publish" class="uiIcon initIcon-63" />
+		</a>
+		<?php
+		}
+	}
+	?></li>
+</ul>
+	<?php
+	$i ++;
+		} //end foreach($data as $value){
+		$strLangKey = implode(",", $langKeys);
+		?>
+<p class="btn"><a class="uiBtn uiBtn-2 addLanguage"
+	href="/language/admin/add/roleId/<?php echo $value['role_id']; ?>"
+	rel="<?php echo $value['role_id']; ?>" onclick="return processLanguage(this,'<?php echo $strLangKey?>', 'language');"
+	title="Add language"><span><span>Add language</span></span></a></p>
+</div>
+<!--end lstViewAdm--> <?php       
+	} //end foreach($datas as $data){
+} //end if if(is_array($datas) && count($datas) > 0){
+?></div>
+<!-- tabsCont lstAdmLang -->
+</form>
+</div>
+<!-- main -->
+
+
+<div id="pAddLanguage" class="wrapPopupRndBox wrapPopupRndGBox popup04">
+<div class="rndPopupBox">
+<div class="rnd topLeft"></div>
+<div class="rnd topRight"></div>
+<div class="rnd bottomLeft"></div>
+<div class="rnd bottomRight"></div>
+<div class="rnd topM"></div>
+<div class="rnd bottomM"></div>
+<div class="rnd leftM"></div>
+<div class="rnd rightM"></div>
+<div class="content"><a href="javascript:void(0);" title="Close"
+	class="btnClose"><img src="/images/dummy.gif" alt="Close"
+	class="uiIcon initIconClose" /></a>
+<form class="frmAddLang" id="frmAddLang" name="frmAddLang"
+	action="/language/admin/add">
+<h2>Add/Edit <span class="titleLang">&nbsp;</span></h2>
+<p><label class="name">Language name</label><span class="value"> <?php
+echo $this->getOptCountry();
+?> </span></p>
+<div class="hightlightMain hightlightMain02"><span
+	class="rnd bottomLeft">&nbsp;</span><span class="rnd bottomRight">&nbsp;</span>
+<div class="blockPagging">
+<ul class="listBtns floatR">
+	<li><a class="btnCancel" title="Cancel" href="#">Cancel</a>
+	</li>
+	<li><a title="Save" class="btnSubmit" href="#">Save</a>
+	</li>
+</ul>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+function submitActionFrm(hanlder, event){
+	var conf = confirm("Are you sure delete ?");
+	if(conf){
+		var frm = $('#frmAdmLanguage');
+		if (frm.length){
+			frm.attr('action',hanlder.href);
+			frm.submit();
+		}	
+	}
+	event.preventDefault();
+	event.stopPropagation();
+	return false;
+}
+</script>
+
+<script type="text/javascript">
+function processLanguage(handler,langkeys, titleL,selVal,edit){
+	var array = langkeys.split(",");
+	$("#country_lang option").each(function(){$(this).attr('style','display:block');});
+	for(i = 0; i < array.length; i ++){
+		$("#country_lang option[value='"+array[i]+"']").attr('style','display:none');
+	}
+	
+	showPopupLayer('#pAddLanguage', '');
+	var titleLang = $('#pAddLanguage .titleLang');
+	titleLang.text(titleL);
+	var country_lang = $('#pAddLanguage #country_lang');
+	country_lang.val('0');
+	if (edit){
+		country_lang.val(selVal.toUpperCase());		
+	}
+	var frm = $('#pAddLanguage #frmAddLang');
+	frm.attr('action',handler.href);
+	
+	var btnCancel = $('#pAddLanguage').find('.btnCancel');
+	btnCancel.unbind('click').bind('click',function(e){
+		if(e) e.preventDefault();
+		$('#pAddLanguage').find('.btnClose').trigger('click');
+	});
+	
+	return false;
+}
+</script>
+
+
+<script type="text/javascript">
+function processImport(handler, id){	
+	showPopupLayer('#importLanguage', '');
+	var frm = $('#importLanguage #frmImportLang');
+	var idInput = $('#importLanguage #id');
+	idInput.val(id);
+	frm.attr('action',handler.href);	
+	return false;
+}
+</script>
+<script type="text/javascript">
+function processCheckDefault(handler,id, role_id,event){	
+
+	/*if (!handler.checked){
+		event.preventDefault();
+		return false;
+	}
+	var frm = $('#importLanguage #frmImportLang');
+	handler = $(handler);
+	$.ajax({
+		url:'/admin/lang-admin/check-default/id/' + id + '/role_id/' + role_id,
+		success:function(response){
+			handler.closest('.lstViewAdm').find('input[type=checkbox]').attr('checked',false);
+			handler.attr('checked',true);
+		}
+	});
+	*/
+	var frm = $('#frmAdmLanguage');
+	var url = '/language/admin/check-default/id/' + id + '/role_id/' + role_id;
+	frm.attr('action', url);
+	frm.submit();
+}
+</script>
+
+
+<div id="importLanguage"
+	class="wrapPopupRndBox wrapPopupRndGBox popup02">
+<div class="rndPopupBox">
+<div class="rnd topLeft"></div>
+<div class="rnd topRight"></div>
+<div class="rnd bottomLeft"></div>
+<div class="rnd bottomRight"></div>
+<div class="rnd topM"></div>
+<div class="rnd bottomM"></div>
+<div class="rnd leftM"></div>
+<div class="rnd rightM"></div>
+<div class="content"><a href="#" title="Close"
+	class="btnClose"><img src="/images/dummy.gif" alt="Close"
+	class="uiIcon initIconClose" /></a>
+<form class="frmImportLang" id="frmImportLang" name="frmImportLang"
+	action="/language/admin/import" enctype="multipart/form-data"
+	method="POST">
+<h2>Choose File</h2>
+<p><span class="value">
+<input type="hidden" id="id" name="id" value="1"/> 
+<input type="file" name="fileUpload"
+	id="fileUpload" value="" /> </span></p>
+<div class="hightlightMain hightlightMain02"><span
+	class="rnd bottomLeft">&nbsp;</span><span class="rnd bottomRight">&nbsp;</span>
+<div class="blockPagging">
+<ul class="listBtns floatR">
+	<li><a class="btnSubmit" title="Save" href="#">Import</a>
+	</li>
+</ul>
+
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>

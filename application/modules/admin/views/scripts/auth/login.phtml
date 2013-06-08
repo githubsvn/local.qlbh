@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    Ext.QuickTips.init();
+
+    var loginForm = { xtype: 'form',
+        id: 'login-form',
+        bodyStyle: 'padding:15px;background:transparent',
+        border: false,
+        items: [
+            { xtype: 'box', autoEl: { tag: 'div',
+                    html: '<div class="app-msg"><img src="img/magic-wand.png" class="app-img" />Log in to The Magic Forum</div>'
+                }
+            },
+            { xtype: 'textfield', id: 'username', fieldLabel: 'Username',
+                allowBlank: false, minLength: 3, maxLength: 32
+            },
+            { xtype: 'textfield', id: 'password', fieldLabel: 'Password', inputType: 'password',
+                allowBlank: false, minLength: 3, maxLength: 32,
+                minLengthText: 'Password must be at least 6 characters long.'
+            }
+        ],
+        buttons: [{
+                text: 'Login',
+                handler: function() {
+                    Ext.getCmp('login-form').getForm().submit(
+                    {
+                        url: '',
+                        waitMsg: 'Submitting your data...',
+                        success: function(form, action){
+                            window.location.href = 'http://local.mtxapp/admin'
+                        },
+                        failure: function(form, action){
+                            alert('Fail');
+                        }
+                    }
+                );
+                }
+            }, {
+                text: 'Cancel',
+                handler: function() {
+                    win.hide();
+                }
+            }]
+    }
+
+    Ext.onReady(function() {
+
+        win = new Ext.Window({
+            applyTo: 'login-win',
+            layout: 'form',
+            width: 340,
+            autoHeight: true,
+            closeAction: 'hide',
+            errorReader: new Ext.data.JsonReader(),
+            items: [loginForm]
+
+        });
+
+        win.show();
+    });
+
+
+</script>
+
+<div id="login-win">
+</div>

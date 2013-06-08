@@ -1,0 +1,83 @@
+<script type="text/javascript">
+
+    // Border Layout
+
+    northPanel = {
+        title: 'North Panel',
+        region: 'north',
+        height: 150,
+        minSize: 75,
+        maxSize: 250,
+        cmargins: '0 0 5 0'
+    }
+
+    southPanel = {
+        title: 'South Panel',
+        region: 'south',
+        height: 150,
+        minSize: 75,
+        maxSize: 250,
+        cmargins: '5 0 0 0'
+    }
+
+    nestedPanel1 = {
+        region: 'north',
+        height: 150
+    }
+
+    nestedPanel2 = {
+        region: 'center'
+    }
+
+    westPanel = {
+        title: 'West Panel',
+        region: 'west',
+        margins: '0 0 0 0',
+        cmargins: '0 5 0 0',
+        width: 175,
+        minSize: 100,
+        maxSize: 250,
+        bodyStyle:'border:0px',
+        layout: 'border',
+        defaults: {
+            collapsible: true,
+            split: true,
+            bodyStyle: 'padding:15px'
+        },
+        items:[nestedPanel1,nestedPanel2]
+    }
+
+    eastPanel = {
+        title: 'East Panel',
+        region: 'east',
+        margins: '0 0 0 0',
+        cmargins: '0 0 0 5',
+        width: 175,
+        minSize: 100,
+        maxSize: 250
+    }
+
+    centerPanel = {
+        title: 'Center Panel',
+        collapsible: false,
+        region: 'center',
+        margins: '0 0 0 0'
+    }
+        
+    Ext.onReady(function() {
+
+        var container = new Ext.Viewport({
+    
+            layout: 'border',
+            defaults: {
+                collapsible: true,
+                split: true,
+                bodyStyle: 'padding:15px'
+            },
+            items: [northPanel, southPanel,
+                westPanel, eastPanel, centerPanel
+            ]
+        });
+
+    });
+</script>

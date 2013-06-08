@@ -1,0 +1,174 @@
+  /**************************/
+ /*        CSS reset       */
+/**************************/ 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend {margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent;}
+ol, ul {list-style:none;}
+blockquote, q {quotes:none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content:''; content:none;}
+:focus {outline:0;}
+ins {text-decoration:none;}
+del {text-decoration:line-through;}
+/*caption, th, td {text-align: left; font-weight: normal;}
+table, caption, tbody, tfoot, thead, tr, th, td {font-size:100%; vertical-align:baseline; outline:0; margin:0; padding:0;}
+table { border-collapse:collapse; border-spacing: 0;}*/
+/******* Default rules tags *******/
+html {min-height:100%;}
+body { font-family:Tahoma, Geneva, sans-serif; color:#000; height: 100%; font-size:12px;}
+h1 {font-size:20px;}
+h2 {font-size:24px; color:#696c6e; font-weight:normal; padding:20px 20px 10px 20px}
+h4{font-size:15px; color:#4c4c4c; padding:0 0 18px;}
+input, select, textarea {font-size:12px; border:1px solid #CCC; font-family: Tahoma, Geneva, sans-serif;}
+a{text-decoration:none; color:#000;}
+a:hover{text-decoration:underline;}
+
+.lstViewAdm {padding:10px 0;}			
+/* Languages Management*/
+	.lstLabel {width:950px; padding:20px;}
+	.listTitle {background: #ddd;}
+	.listGrid {color:#353a3d; width:428px; padding:8px 0; overflow:hidden;width: auto; }
+		.listGrid li{ float:left; line-height:normal;text-align: left; padding: 2px 10px;}
+		.listGrid li input{float:left;}
+		.listGrid li .checkbox{margin-top:3px;}
+		.listGrid li label{line-height:18px;}
+		.listGrid .cell03 input, .listGrid .cell04 input { width: 195px; height: 17px; border: 1px solid #8F8F8F;}
+		.listGrid a.action, .listGrid a.detail{ color: #3a8ce8; margin-right: 5px; text-decoration: none;}
+		.listGrid a.action:hover, .listGrid a.detail:hover { text-decoration: none; color: #91961e;}
+	.cell01 { width: 50px;}
+	.cell02 { width: 150px;}
+	.cell03 { width: 200px;}
+	.cell04 { width: 200px;}
+	.cell05 { width: 100px;}
+	.cell06 { width: 250px;}
+	.lstSelect { overflow: hidden; padding-bottom: 20px;}
+	.lstSelect select { margin-left: 10px;}
+	.lstSelect li { float: left; padding-right: 20px;}
+/*listBtns*/
+	.listBtns {height:31px; background:url(../images/bgd-repeat-x.png) 0 -36px repeat-x; margin:0;}
+	.listBtns li{display:inline; background:url(../images/lineNavi.png) no-repeat 0 -40px; padding:0 11px 1px; float:left; line-height:30px; height: 30px;}
+		.listBtns .first{background-position:100% -40px;}
+		.listBtns a img{margin-right:4px;}
+		.listBtns a {color:#3C3D3F;}
+		.listBtns a:hover {color:#616500; text-decoration:none;}
+		.listBtns .bgdnone {background:none;}
+		.listBtns li.wdth {padding:0 20px 0 20px; line-height:30px;}		
+/* Admin Language*/
+	.lstAdmLang { padding:20px; width: 950px;}	
+		.lstAdmLang .cell01 { width: 120px;}
+		.lstAdmLang .cell02 { width: 80px;}
+		.lstAdmLang .cell03 { width: 150px;}
+		.lstAdmLang .cell04 { width: 120px;}
+		.lstAdmLang .cell05 { width: 100px;}
+		.lstAdmLang .cell06 { width: 250px;}
+		.lstAdmLang .btn { padding-top: 15px; overflow: hidden;}
+		.lstAdmLang .uiBtn { float: right;}
+	.wrapPopupRndGBox  .frmAddLang p {padding:5px 20px}
+	.wrapPopupRndGBox  .frmAddLang p label {padding:0 0 5px; font-size:13px; display:block;}
+	.wrapPopupRndGBox  .frmAddLang p select {height:22px; padding:1px;}
+/*4 ///////Layer common of templates///////*/
+		.wrapPopupRndBox { width:290px; font-size:12px; position: absolute; top: -15000px}
+		.rndPopupBox { position:relative;  float: left; padding: 0 13px;}
+		.rndPopupBox .rnd { position:absolute; width:18px; height:18px; line-height:18px; display:block;}
+		.rndPopupBox .bottomM, .rndPopupBox .topM { left:18px; right:18px; width:auto;height:18px; }
+		.rndPopupBox .topLeft { top:-18px; left:0; background-position:0 0;}
+		.rndPopupBox .topRight { top:-18px; right:0; background-position:100% 0;}
+		.rndPopupBox .bottomLeft { bottom:-18px; left:0; background-position:0 -18px;}
+		.rndPopupBox .bottomRight { bottom:-18px; right:0; background-position: 100% -18px;}
+		.rndPopupBox .topM { top:-18px; left:18px; background-position:0 0;}
+		.rndPopupBox .bottomM { bottom:-18px; left:18px; background-position:100% 100%;}		
+		.rndPopupBox .leftM { background-position:0 0;} 
+		.rndPopupBox .rightM { background-position:-18px 0;}
+		.rndPopupBox .content { position:relative;  padding:4px 0 0; /*min-height:180px;*/ background:#b5bc28 url(../images/bgd_ui_PopupBox01_content.png) repeat-x;}
+			
+		.rndPopupBox .rnd
+		{ background-image: url(../images/ui_PopupBox01.png); background-repeat:repeat-x}
+		/*left Middle*/
+		.rndPopupBox .leftM
+		{ top:0; left:0; height:100%; background-image:url(../images/bgd_uiPopupBox_01_y.png); background-repeat:repeat-y}
+		/*right Middle*/
+		.rndPopupBox .rightM
+		{ top:0; right:0; height:100%; background-image:url(../images/bgd_uiPopupBox_01_y.png); background-repeat:repeat-y}
+		.rndPopupBox .topM
+		{ background-image:url(../images/bgd_uiPopupBox_01_x.png); background-repeat:repeat-x}	
+		.rndPopupBox .bottomM
+		{ background-image:url(../images/bgd_uiPopupBox_01_x.png); background-repeat:no-repeat}
+	
+	#content .rndC, .blockLogin .rnd, #wrapNav .rnd, .hightlightMain .rnd, .blockTagsBottom .rnd, #footer .rnd { position:absolute; width:5px; height:5px; line-height:5px; display:block; background-image:url(../images/uiBox.png); background-repeat:repeat-x}			
+			/****grey box*****/
+		.wrapPopupRndGBox{position: absolute; top: -15000px}
+			.wrapPopupRndGBox .rndPopupBox  .rnd, .loginBoxContainer .rndPopupBox .rnd {background-image: url(../images/ui_PopupBox03.png);}
+			.wrapPopupRndGBox .rndPopupBox .leftM, .loginBoxContainer .rndPopupBox .leftM {background-image:url(../images/bgd_uiPopupBox_03_y.png);}
+			.wrapPopupRndGBox .rndPopupBox .rightM, .loginBoxContainer .rndPopupBox .rightM{background-image:url(../images/bgd_uiPopupBox_03_y.png);}
+			.wrapPopupRndGBox .rndPopupBox .topM, .loginBoxContainer .rndPopupBox .topM{background-image:url(../images/bgd_uiPopupBox_03_x.png);}
+			.wrapPopupRndGBox .rndPopupBox .bottomM, .loginBoxContainer .rndPopupBox .bottomM {background-position:0 100%; background-image:url(../images/bgd_uiPopupBox_03_x.png); background-repeat:repeat-x}
+			.wrapPopupRndGBox .rndPopupBox .content, .loginBoxContainer .rndPopupBox .content {background:#fff url(../images/bgd_ui_PopupBox03_content.png) repeat-x;  padding:0 0 50px; float: left;}
+	
+			.wrapPopupRndGBox .hightlightMain .rnd{background-image:url(../images/uiBox.png);}
+			.wrapPopupRndGBox .hightlightMain .bottomLeft{background-position:0 -77px;}
+			.wrapPopupRndGBox .hightlightMain .bottomRight{background-position:-5px -77px;}
+			.contTypeInner{background:url(../images/bgd_contTypeInner.png) 0 100% no-repeat; padding:10px 10px 27px;}
+			.wrapPopupRndGBox .rndPopupBox .contTypeInner{min-height:230px;}
+			.wrapPopupRndGBox .blockPagging{border-right:none;}
+			.wrapPopupRndGBox .hightlightMain02{position:absolute; bottom: -5px; left:0; border-top:1px solid #bcbfc3; height: 31px;}
+			
+			.popup01{width:982px;}
+			.popup01 .rndPopupBox .contType2{width:920px; min-height:520px;}	
+			.popup01 .rndPopupBox .contTypeInner{min-height:483px;}
+			.popup01 .hightlightMain02{}
+			.btnClose{position:absolute; top:0; right:5px;}
+			
+			.popup02{width:auto;}
+			.popup02 .rndPopupBox .content{padding:10px 20px; min-height:150px;}
+			.popup02 h2, .popup03 h2{font-size:18px; color:#000;padding-top:0;}
+			.popup02 p{line-height:16px; padding:0 0 15px;}
+			.popup02 .iptType input{width:200px; padding-right:0;}
+			.popup02 .iptType2{width:174px; padding:1px 3px; margin-right:5px; height:16px;}
+			
+			
+			.lstInpt {}
+			.lstInpt li {overflow:hidden; padding:0 0 10px;}
+			.lstInpt label {float:left; width:110px;}
+			.lstInpt input {float:left; width:200px;}
+			
+			.floatR {float:right!important;}
+			
+			
+		/*hightlight*/	
+		.hightlightMain { width:100%; height:31px; background:url(../images/bgd-repeat-x.png) 0 -36px repeat-x; position:relative; margin:0;}
+		.hightlightMain .topLeft { top:0; left:0; background-position:0 -24px;}
+		.hightlightMain .topRight { top:0; right:0; background-position:-5px -24px; z-index:5}
+		.wrapPopupRndGBox .hightlightMain .bottomLeft, .hightlightMain .bottomLeft {bottom:0; left:0; background-position:0 -29px;}
+		.wrapPopupRndGBox .hightlightMain .bottomRight, .hightlightMain .bottomRight {bottom:0; right:0; background-position:-5px -29px; z-index:5}
+		
+			
+		/*2. ///////Block type of templates//////*/
+		
+		/*Button link*/
+		/***buttons***/
+		.uiBtn{color:#4c4c4c;background-image: url(../images/uiButtons.png); background-repeat:no-repeat; height:24px; line-height:24px; display:inline-block; padding-left:8px;}
+		.uiBtn:hover{color:#616500; text-decoration:none;}
+		.uiBtn span{background-image: url(../images/uiButtons.png); background-repeat:no-repeat; height:24px; display:inline-block; padding-right:8px; cursor:pointer;}
+		.uiBtn span span{background-image: url(../images/uiButtons.png); background-repeat:repeat-x; padding-right:0; text-align:center;}
+		.uiBtn-1 span{background-position:100% -24px;}
+		.uiBtn-1 span span{background-position:0 -48px;}
+		.uiBtn-2{height:20px; line-height:20px; background-position:0 -72px;}
+		.uiBtn-2 span{background-position:100% -92px; height:20px;}
+		.uiBtn-2 span span{background-position:0 -112px;}
+
+/*uiIcon*/			
+.uiIcon{ background-image:url(../images/uiIcon01.png); background-repeat:no-repeat; vertical-align: middle;}	
+	.initIconDelete{ background-position:0 -496px; width:15px; height:19px; }
+			a:hover .initIconDelete{ background-position:-40px -496px;}
+	.initIcon-62 {background-position: 0 -1860px; width:20px; height:21px;} /*publish icon*/
+			a:hover .initIcon-62 {background-position: -40px -1860px;}
+	.initIcon-63 {background-position: 1px -1890px; width:23px; height:24px;} /*unpublish icon*/
+			a:hover .initIcon-63 {background-position: -40px -1890px;}
+	.initIconClose{background-position:0 -528px; width:20px; height:19px; display:inline-block;}
+			a:hover .initIconClose{background-position:-40px -528px;}

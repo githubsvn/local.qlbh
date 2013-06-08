@@ -1,0 +1,61 @@
+<div class="hightlightMain">
+	<span class="rnd bottomLeft"></span>
+	<span class="rnd bottomRight"></span>
+	<div class="blockPagging">
+		<form id="frmPagging" name="frmPagging" method="post" action="<?php echo $this->url(array('page' => 1))?>">
+			<div class="blockResults">
+				<select class="select01 wthSelcType3" name="itemPerPage" id="itemPerPage" onChange="document.frmPagging.submit();">
+				<?php         		
+        		if(count($this->listItemPerPage) > 0)
+        		{
+        			foreach($this->listItemPerPage as $item)
+        			{
+        				$k = (int)$item;
+        				$t = $item;
+        				$selected = ($item == $this->items_per_page) ? 'selected="selected"' : '';
+						echo "<option value='$k' $selected>$t</option>";
+        			}
+				}
+				else
+				{
+					echo "<option value='$this->limitDefault'>$this->limitDefault</option>";
+				}
+				?>
+				</select>
+			</div>
+			
+			<div class="blockTotalpage">
+				<span>Page</span>
+				<select class="select01 wthSelcType4 floatL" name="Pageging" id="Pageging" onChange="window.location='<?php echo $this->url(array('page' => ''))?>'+this.value">
+				<?php for($i=1; $i<=$this->total_pages; $i++){ ?>
+					<option value="<?php echo $i?>" <?php if($this->current_page == $i) echo 'selected="selected"'?>><?php echo $i?></option>
+				<?php }?>
+				<?php if($this->total_pages == 0){?>
+					<option value="1">1</option>
+				<?php }?>
+				</select>
+				<span>of</span><span><?php echo ($this->total_pages == 0) ? 1 : $this->total_pages ?></span>
+				
+				<?php if($this->show_btn_submit){?>
+				<ul class="listBtns02 floatR">
+					<li> <a href="javascript:document.<?php echo $this->submit_form_name?>.submit();" title="Save changes"><img src="/images/dummy.gif" alt="Save changes" class="uiIcon initIconSave" /> Save changes</a> </li>
+				</ul>
+				<?php }// endif?>
+				
+			</div>
+			
+			<ul class="pagging">
+				<?php 
+					$prevUrl = ($this->previous_page) ? $this->url(array('page' => $this->previous_page)) : 'javascript:;';
+					$nextUrl = ($this->next_page) ? $this->url(array('page' => $this->next_page)) : 'javascript:;';
+				?>
+				<li>
+					<a href="<?php echo $prevUrl ?>" title="Previous Page"><img src="/images/dummy.gif" alt="Previous Page" class="uiIcon initIconPrevious"> Previous Page</a>
+				</li>
+				<li>
+			        <a href="<?php echo $nextUrl ?>" title="Next Page">Next Page <img src="/images/dummy.gif" alt="Previous Page" class="uiIcon initIconNext"></a>
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
