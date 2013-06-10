@@ -1,8 +1,23 @@
 <script type="text/javascript">
     Ext.onReady(function(){
+        // Accordion layout.
+        panelLeftHangHoa = new Ext.Panel({
+            title: '<?php echo $this->translate("HÀNG HÓA"); ?>'
+        });
+
+        panelLeftDanhMuc = new Ext.Panel({
+            title: '<?php echo $this->translate("DANH MỤC"); ?>'
+        });
+        panelLeftDuLieu = new Ext.Panel({
+            title: '<?php echo $this->translate("DỮ LIỆU"); ?>'
+        });
+        panelLeftHeThong = new Ext.Panel({
+            title: '<?php echo $this->translate("HỆ THỐNG"); ?>'
+        });
+                    
         var viewport = new Ext.Viewport({
             layout: 'border',
-            id: 'movieview',
+            id: 'main',
             renderTo: document.body,
             items: [
                 {
@@ -10,30 +25,82 @@
                     tbar: [{
                             xtype: 'toolbar',
                             items: [{
-                                    text: 'Sytem',
+                                    text: '<?php echo $this->translate("HỆ THỐNG"); ?>',
                                     iconCls: 'icon-table',
-                                    menu: [{ text: 'Menu 1' },{ text: 'Menu 1'}]
+                                    menu: [
+                                        { 
+                                            text: '<?php echo $this->translate("Thoát"); ?>',
+                                            handler: function(item){
+                                                window.location.href = '<?php echo $this->baseUrl() . '/admin/auth/logout' ?>'
+                                            }
+                                        }
+                                    ]
                                 }, '-', {
-                                    text: 'Category',
+                                    text: '<?php echo $this->translate("HÀNG HÓA"); ?>',
                                     iconCls: 'icon-chart',
                                     menu: [{ text: 'Menu 3'}, { text: 'Menu 4'}]
                                 }, '-', {
-                                    text: 'Report',
+                                    text: '<?php echo $this->translate("DANH MỤC"); ?>',
+                                    iconCls: 'icon-chart',
+                                    menu: [
+                                        {
+                                            text: '<?php echo $this->translate('DM Ngành Hàng'); ?>',
+                                            handler: function(item) {
+                                                var w = new Ext.Window(
+                                                {
+                                                    title: '<?php echo $this->translate('DM Ngành Hàng'); ?>',
+                                                    draggable: false,
+                                                    resizable: false,
+                                                    width: document.body.offsetWidth,
+                                                    height: document.body.offsetHeight,
+                                                    layout: 'border',
+                                                    items: [
+                                                        {
+                                                            region: 'north',
+                                                            title: 'Menu Top'
+                                                        },{
+                                                            region: 'west',
+                                                            title: 'Left Menu'
+                                                        }, {
+                                                            region: 'center',
+                                                            title: 'Center'
+                                                        }
+                                                    ]
+                                                }
+                                            )
+                                                w.show();
+                                            }
+                                        },{ 
+                                            text: 'Menu 4'
+                                        }
+                                    ]
+                                }, '-', {
+                                    text: '<?php echo $this->translate("BÁO CÁO"); ?>',
+                                    iconCls: 'icon-chart',
+                                    menu: [{ text: 'Menu 3'}, { text: 'Menu 4'}]
+                                }, '-', {
+                                    text: '<?php echo $this->translate("TRỢ GIÚP"); ?>',
                                     iconCls: 'icon-chart',
                                     menu: [{ text: 'Menu 3'}, { text: 'Menu 4'}]
                                 }]
                         }]
-                },{
+                },
+                /*
+                {
                     region: 'west',
                     border: false,
                     split: true,
                     collapsible: true,
                     collapseMode: 'mini',
-                    title: 'Menu',
                     width: 250,
-                    minSize: 250
-                },{
-                    title: 'Center Panel',
+                    minSize: 250,
+                    enableTabScroll : true,
+                    layout: 'accordion',
+                    items: [
+                        panelLeftHangHoa, panelLeftDanhMuc, panelLeftDuLieu, panelLeftHeThong
+                    ]
+                }, */
+                {
                     region: 'center',
                     border: false
                 }

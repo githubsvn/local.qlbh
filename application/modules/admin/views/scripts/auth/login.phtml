@@ -6,12 +6,11 @@
         bodyStyle: 'padding:15px;background:transparent',
         border: false,
         items: [
-            { xtype: 'textfield', id: 'username', fieldLabel: '<?php echo $this->translate('Username');?>',
+            { xtype: 'textfield', id: 'username', fieldLabel: '<?php echo $this->translate('Tên đăng nhập'); ?>',
                 allowBlank: false, minLength: 3, maxLength: 32, width: 200
             },
-            { xtype: 'textfield', id: 'password', fieldLabel: '<?php echo $this->translate('Password');?>', inputType: 'password',
-                allowBlank: false, minLength: 3, maxLength: 32, width: 200,
-                minLengthText: '<?php echo $this->translate('Password must be at least 6 characters long');?>'
+            { xtype: 'textfield', id: 'password', fieldLabel: '<?php echo $this->translate('Mật khẩu'); ?>', inputType: 'password',
+                allowBlank: false, minLength: 3, maxLength: 32, width: 200
             }
         ],
         buttons: [{
@@ -19,12 +18,17 @@
                 handler: function() {
                     Ext.getCmp('login-form').getForm().submit(
                     {
-                        waitMsg: '<?php echo $this->translate('Submitting your data...');?>',
+                        waitMsg: '<?php echo $this->translate('Đang xữ lý...'); ?>',
                         success: function(form, action){
-                            window.location.href = 'http://local.qlbh/admin'
+                            window.location.href = '<?php echo $this->baseUrl() . '/admin' ?>'
                         },
                         failure: function(form, action){
-                            alert('Fail');
+                            Ext.Msg.show({
+                                title:'<?php echo $this->translate('Cảnh Báo'); ?>',
+                                msg: '<?php echo $this->translate('Tên đăng nhập hoặc mật khẩu không hợp lệ. Xin vui lòng thử lại.'); ?>',
+                                icon: Ext.MessageBox.ERROR,
+                                buttons: Ext.MessageBox.OK
+                            });
                         }
                     }
                 );
@@ -37,7 +41,7 @@
         win = new Ext.Window({
             applyTo: 'login-win',
             layout: 'form',
-            title: 'Login Form',
+            title: '<?php echo $this->translate('Đăng Nhập'); ?>',
             draggable: false,
             resizable: false,
             width: 350,
