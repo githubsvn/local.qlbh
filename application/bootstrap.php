@@ -6,7 +6,7 @@
  * @version			$Id: Bootstrap.php April 11, 2011 11:04:44 PM$
  * @category		ZFAdmin
  * @package			ZFAdmin Package
- * @subpackage		subpackage	
+ * @subpackage		subpackage
  * @copyright		Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.
  * @author			thuan.uaf.it@gmail.com <Nguyen Quang Thuan>
  * @implements		all members
@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     /**
      * Bootstrap autoloader for application resources
-     * 
+     *
      * @return Zend_Application_Module_Autoloader
      */
     protected function _initAutoload() {
@@ -58,7 +58,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initHelpers() {
-        
+
     }
 
     /**
@@ -83,8 +83,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     /**
      * @Desc : Initial all viewer setting here
-     * 
-     * @return : void 
+     *
+     * @return : void
      */
     protected function _initViewSettings() {
         try {
@@ -95,9 +95,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
 
         $this->bootstrap('view');
-        //$this->_view = $this->getResource ( 'view' );        
+        //$this->_view = $this->getResource ( 'view' );
         // Load scripts to viewers!!
-        //$this->_view->addScriptPath("/path/to/scripts/folder");        
+        //$this->_view->addScriptPath("/path/to/scripts/folder");
         // Load view helper
         $this->view->addHelperPath('MTxCore' . DS . 'View' . DS . 'Helper', 'MTxCore_View_Helper');
         $this->view->addHelperPath(APP_PATH . DS . 'modules' . DS . 'language' . DS . 'libraries' . DS . 'views' . DS . 'helpers', 'Language_Libraries_Views_Helpers_');
@@ -109,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initPlugins() {
-        
+
     }
 
     /**
@@ -118,7 +118,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initRoutes() {
-        
+
     }
 
     /**
@@ -127,7 +127,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initControllers() {
-        
+
     }
 
     /**
@@ -176,6 +176,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             //$this->frontController->setBaseUrl('/sub-folder');
             $this->_frontController->dispatch();
         } catch (Exception $e) {
+            echo $e->getMessage();die;
             $logger = Zend_Registry::get('logger');
             $request = $this->_frontController->getRequest();
             $params = $request->getParams();

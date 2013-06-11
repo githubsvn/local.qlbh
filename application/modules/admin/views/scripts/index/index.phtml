@@ -14,7 +14,7 @@
         panelLeftHeThong = new Ext.Panel({
             title: '<?php echo $this->translate("HỆ THỐNG"); ?>'
         });
-                    
+
         var viewport = new Ext.Viewport({
             layout: 'border',
             id: 'main',
@@ -28,7 +28,7 @@
                                     text: '<?php echo $this->translate("HỆ THỐNG"); ?>',
                                     iconCls: 'icon-table',
                                     menu: [
-                                        { 
+                                        {
                                             text: '<?php echo $this->translate("Thoát"); ?>',
                                             handler: function(item){
                                                 window.location.href = '<?php echo $this->baseUrl() . '/admin/auth/logout' ?>'
@@ -50,8 +50,13 @@
                                                 var dmNganhHang = new DMNganhHang();
                                                 dmNganhHang.showMainWindow(document.body.offsetWidth, document.body.offsetHeight);
                                             }
-                                        },{ 
-                                            text: 'Menu 4'
+                                        },{
+                                            text: '<?php echo $this->translate("DM Nhà Cung Cấp");?>',
+                                            handler: function() {
+                                                //Show main layout for DM Nganh Hang
+                                                var dmNcc = new DMNhaCungCap();
+                                                dmNcc.showMainWindow(document.body.offsetWidth, document.body.offsetHeight);
+                                            }
                                         }
                                     ]
                                 }, '-', {
@@ -85,6 +90,6 @@
                     border: false
                 }
             ]
-        }); 
+        });
     }); //Ext.onReady
 </script>

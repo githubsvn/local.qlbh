@@ -16,7 +16,7 @@
  * 
  * @category 	MTxCore
  * @package 	MTxCore >> Base model
- * @copyright 	Copyright (c) 2000-2011 SuttixMedia VN JSC.
+ * @copyright 	Copyright (c) 2000-2013 SuttixMedia VN JSC.
  * @license 	http://www.sutrixmedia.com
  * @version 	MTxCore version 1.0.0
  * @author 		
@@ -43,7 +43,7 @@ class Model_Entities_AclUsers
     protected $_role_id = null;
 
     /**
-     * @var varchar
+     * @var int
      */
     protected $_user_id = null;
 
@@ -184,7 +184,7 @@ class Model_Entities_AclUsers
     /**
      * Set the _user_id property
      * 
-     * @param string $value
+     * @param int $value
      * @return mixed
      */
     public function setUserId($value = null)
@@ -196,7 +196,7 @@ class Model_Entities_AclUsers
     /**
      * Retrieve the _user_id property
      * 
-     * @return string|null
+     * @return int|null
      */
     public function getUserId()
     {

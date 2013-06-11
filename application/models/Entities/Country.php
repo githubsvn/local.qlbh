@@ -16,7 +16,7 @@
  * 
  * @category 	MTxCore
  * @package 	MTxCore >> Base model
- * @copyright 	Copyright (c) 2000-2011 SuttixMedia VN JSC.
+ * @copyright 	Copyright (c) 2000-2013 SuttixMedia VN JSC.
  * @license 	http://www.sutrixmedia.com
  * @version 	MTxCore version 1.0.0
  * @author 		
@@ -50,7 +50,17 @@ class Model_Entities_Country
     /**
      * @var varchar
      */
+    protected $_name_cap = null;
+
+    /**
+     * @var varchar
+     */
     protected $_code = null;
+
+    /**
+     * @var int
+     */
+    protected $_num_code = null;
 
     /**
      * @var datetime
@@ -214,6 +224,28 @@ class Model_Entities_Country
     }
 
     /**
+     * Set the _name_cap property
+     * 
+     * @param string $value
+     * @return mixed
+     */
+    public function setNameCap($value = null)
+    {
+        $this->_name_cap = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the _name_cap property
+     * 
+     * @return string|null
+     */
+    public function getNameCap()
+    {
+        return $this->_name_cap;
+    }
+
+    /**
      * Set the _code property
      * 
      * @param string $value
@@ -233,6 +265,28 @@ class Model_Entities_Country
     public function getCode()
     {
         return $this->_code;
+    }
+
+    /**
+     * Set the _num_code property
+     * 
+     * @param int $value
+     * @return mixed
+     */
+    public function setNumCode($value = null)
+    {
+        $this->_num_code = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the _num_code property
+     * 
+     * @return int|null
+     */
+    public function getNumCode()
+    {
+        return $this->_num_code;
     }
 
     /**

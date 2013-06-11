@@ -16,7 +16,7 @@
  * 
  * @category 	MTxCore
  * @package 	MTxCore >> Table Object
- * @copyright 	Copyright (c) 2000-2011 SuttixMedia VN JSC.
+ * @copyright 	Copyright (c) 2000-2013 SuttixMedia VN JSC.
  * @license 	http://www.sutrixmedia.com
  * @version 	MTxCore version 1.0.0
  * @author 		

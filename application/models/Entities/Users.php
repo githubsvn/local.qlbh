@@ -16,7 +16,7 @@
  * 
  * @category 	MTxCore
  * @package 	MTxCore >> Base model
- * @copyright 	Copyright (c) 2000-2011 SuttixMedia VN JSC.
+ * @copyright 	Copyright (c) 2000-2013 SuttixMedia VN JSC.
  * @license 	http://www.sutrixmedia.com
  * @version 	MTxCore version 1.0.0
  * @author 		
@@ -63,9 +63,29 @@ class Model_Entities_Users
     protected $_email = null;
 
     /**
+     * @var tinyint
+     */
+    protected $_status = null;
+
+    /**
      * @var datetime
      */
     protected $_date_created = null;
+
+    /**
+     * @var int
+     */
+    protected $_user_created = null;
+
+    /**
+     * @var datetime
+     */
+    protected $_date_modified = null;
+
+    /**
+     * @var int
+     */
+    protected $_user_modified = null;
 
     /**
      * Constructor
@@ -290,6 +310,28 @@ class Model_Entities_Users
     }
 
     /**
+     * Set the _status property
+     * 
+     * @param int $value
+     * @return mixed
+     */
+    public function setStatus($value = null)
+    {
+        $this->_status = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the _status property
+     * 
+     * @return int|null
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+
+    /**
      * Set the _date_created property
      * 
      * @param string $value
@@ -309,6 +351,72 @@ class Model_Entities_Users
     public function getDateCreated()
     {
         return $this->_date_created;
+    }
+
+    /**
+     * Set the _user_created property
+     * 
+     * @param int $value
+     * @return mixed
+     */
+    public function setUserCreated($value = null)
+    {
+        $this->_user_created = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the _user_created property
+     * 
+     * @return int|null
+     */
+    public function getUserCreated()
+    {
+        return $this->_user_created;
+    }
+
+    /**
+     * Set the _date_modified property
+     * 
+     * @param string $value
+     * @return mixed
+     */
+    public function setDateModified($value = null)
+    {
+        $this->_date_modified = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the _date_modified property
+     * 
+     * @return string|null
+     */
+    public function getDateModified()
+    {
+        return $this->_date_modified;
+    }
+
+    /**
+     * Set the _user_modified property
+     * 
+     * @param int $value
+     * @return mixed
+     */
+    public function setUserModified($value = null)
+    {
+        $this->_user_modified = $value;
+        return $this;
+    }
+
+    /**
+     * Retrieve the _user_modified property
+     * 
+     * @return int|null
+     */
+    public function getUserModified()
+    {
+        return $this->_user_modified;
     }
 
     /**

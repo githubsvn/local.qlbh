@@ -16,7 +16,7 @@
  * 
  * @category 	MTxCore
  * @package 	MTxCore >> Mapper
- * @copyright 	Copyright (c) 2000-2011 SuttixMedia VN JSC.
+ * @copyright 	Copyright (c) 2000-2013 SuttixMedia VN JSC.
  * @license 	http://www.sutrixmedia.com
  * @version 	MTxCore version 1.0.0
  * @author 		
@@ -77,7 +77,11 @@ class Model_Entities_Mapper_UsersMapper
         	'first_name' => $object->getFirstName(),
         	'last_name' => $object->getLastName(),
         	'email' => $object->getEmail(),
-        	'date_created' => $object->getDateCreated()
+        	'status' => $object->getStatus(),
+        	'date_created' => $object->getDateCreated(),
+        	'user_created' => $object->getUserCreated(),
+        	'date_modified' => $object->getDateModified(),
+        	'user_modified' => $object->getUserModified()
         );
         if ($ignoreEmptyValuesOnUpdate){
         	foreach ( $data as $key => $value )
@@ -112,7 +116,11 @@ class Model_Entities_Mapper_UsersMapper
         	'first_name' => $object->getFirstName(),
         	'last_name' => $object->getLastName(),
         	'email' => $object->getEmail(),
-        	'date_created' => $object->getDateCreated()
+        	'status' => $object->getStatus(),
+        	'date_created' => $object->getDateCreated(),
+        	'user_created' => $object->getUserCreated(),
+        	'date_modified' => $object->getDateModified(),
+        	'user_modified' => $object->getUserModified()
         );
     }
 
@@ -133,7 +141,11 @@ class Model_Entities_Mapper_UsersMapper
         	->setFirstName($dtr->first_name)
         	->setLastName($dtr->last_name)
         	->setEmail($dtr->email)
+        	->setStatus($dtr->status)
         	->setDateCreated($dtr->date_created)
+        	->setUserCreated($dtr->user_created)
+        	->setDateModified($dtr->date_modified)
+        	->setUserModified($dtr->user_modified)
         	->setMapper ( $this );
     }
 
@@ -157,7 +169,11 @@ class Model_Entities_Mapper_UsersMapper
         		->setFirstName($dtr->first_name)
         		->setLastName($dtr->last_name)
         		->setEmail($dtr->email)
+        		->setStatus($dtr->status)
         		->setDateCreated($dtr->date_created)
+        		->setUserCreated($dtr->user_created)
+        		->setDateModified($dtr->date_modified)
+        		->setUserModified($dtr->user_modified)
         		->setMapper ( $this );
         	$entries [$key] = $object;}return $entries;
     }

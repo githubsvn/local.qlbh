@@ -16,7 +16,7 @@
  * 
  * @category 	MTxCore
  * @package 	MTxCore >> Mapper
- * @copyright 	Copyright (c) 2000-2011 SuttixMedia VN JSC.
+ * @copyright 	Copyright (c) 2000-2013 SuttixMedia VN JSC.
  * @license 	http://www.sutrixmedia.com
  * @version 	MTxCore version 1.0.0
  * @author 		
@@ -74,7 +74,9 @@ class Model_Entities_Mapper_CountryMapper
         	'id' => $object->getId(),
         	'key' => $object->getKey(),
         	'name' => $object->getName(),
+        	'name_cap' => $object->getNameCap(),
         	'code' => $object->getCode(),
+        	'num_code' => $object->getNumCode(),
         	'date_create' => $object->getDateCreate()
         );
         if ($ignoreEmptyValuesOnUpdate){
@@ -107,7 +109,9 @@ class Model_Entities_Mapper_CountryMapper
         	'id' => $object->getId(),
         	'key' => $object->getKey(),
         	'name' => $object->getName(),
+        	'name_cap' => $object->getNameCap(),
         	'code' => $object->getCode(),
+        	'num_code' => $object->getNumCode(),
         	'date_create' => $object->getDateCreate()
         );
     }
@@ -126,7 +130,9 @@ class Model_Entities_Mapper_CountryMapper
         $object->setId($dtr->id)
         	->setKey($dtr->key)
         	->setName($dtr->name)
+        	->setNameCap($dtr->name_cap)
         	->setCode($dtr->code)
+        	->setNumCode($dtr->num_code)
         	->setDateCreate($dtr->date_create)
         	->setMapper ( $this );
     }
@@ -148,7 +154,9 @@ class Model_Entities_Mapper_CountryMapper
         	$object->setId($dtr->id)
         		->setKey($dtr->key)
         		->setName($dtr->name)
+        		->setNameCap($dtr->name_cap)
         		->setCode($dtr->code)
+        		->setNumCode($dtr->num_code)
         		->setDateCreate($dtr->date_create)
         		->setMapper ( $this );
         	$entries [$key] = $object;}return $entries;
