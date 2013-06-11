@@ -6,6 +6,13 @@
         echo $this->headTitle('Admin Control Panel') ?>
         <?php $this->headScript()->appendFile($this->baseUrl() . '/js/extjs3/ext-base.js') ?>
         <?php $this->headScript()->appendFile($this->baseUrl() . '/js/extjs3/ext-all.js') ?>
+        
+        <!--Config global-->
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/config/global.js') ?>
+        
+        <!--DM Nganh Hang-->
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/view/dm.nganhhang/DMNganhHang.js') ?>
+        
         <?php echo $this->headScript(); ?>
         <?php $this->headLink()->prependStylesheet($this->baseUrl() . '/js/extjs3/resources/css/ext-all.css'); ?>
         <?php echo $this->headLink(); ?>

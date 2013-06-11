@@ -46,29 +46,9 @@
                                         {
                                             text: '<?php echo $this->translate('DM Ngành Hàng'); ?>',
                                             handler: function(item) {
-                                                var w = new Ext.Window(
-                                                {
-                                                    title: '<?php echo $this->translate('DM Ngành Hàng'); ?>',
-                                                    draggable: false,
-                                                    resizable: false,
-                                                    width: document.body.offsetWidth,
-                                                    height: document.body.offsetHeight,
-                                                    layout: 'border',
-                                                    items: [
-                                                        {
-                                                            region: 'north',
-                                                            title: 'Menu Top'
-                                                        },{
-                                                            region: 'west',
-                                                            title: 'Left Menu'
-                                                        }, {
-                                                            region: 'center',
-                                                            title: 'Center'
-                                                        }
-                                                    ]
-                                                }
-                                            )
-                                                w.show();
+                                                //Show main layout for DM Nganh Hang
+                                                var dmNganhHang = new DMNganhHang();
+                                                dmNganhHang.showMainWindow(document.body.offsetWidth, document.body.offsetHeight);
                                             }
                                         },{ 
                                             text: 'Menu 4'
