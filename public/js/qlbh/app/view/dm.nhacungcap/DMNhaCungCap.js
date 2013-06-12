@@ -97,7 +97,7 @@ function DMNhaCungCap() {
         loadMask: true,
         bbar: new Ext.PagingToolbar({
             pageSize: pageSize,
-            store: this.store,
+            store: this.storeListNcc,
             displayInfo: true,
             displayMsg: 'Hiện thị {0} - {1} trong tổng số {2} mẫu tin.',
             emptyMsg: "Không tồn tại mẫu tin nào."
