@@ -16,7 +16,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // Add autoloader empty namespace
         $moduleLoader = new Zend_Application_Module_Autoloader(array('namespace' => '', 'basePath' => APP_PATH));
 
-
         /**
          * Auto load for Entity
          */
@@ -34,9 +33,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      *
      * @return void
      */
-    protected function _initDB() {
-        $this->bootstrap("doctrine");
-    }
+    //protected function _initDB() {
+        //$this->bootstrap("doctrine");
+    //}
 
     /**
      * Setup logging
