@@ -1,18 +1,4 @@
 <?php
-
-/**
- * Here're your description about this file and its function
- *
- * @version			$Id: Bootstrap.php April 11, 2011 11:04:44 PM$
- * @category		ZFAdmin
- * @package			ZFAdmin Package
- * @subpackage		subpackage
- * @copyright		Copyright (C) 2005 - 2011 Open Source Matters. All rights reserved.
- * @author			thuan.uaf.it@gmail.com <Nguyen Quang Thuan>
- * @implements		all members
- * @file			Bootstrap.php
- *
- */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     protected $_frontController;
@@ -48,9 +34,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      *
      * @return void
      */
-    //protected function _initDB() {
-    //    $this->bootstrap("doctrine");
-    //}
+    protected function _initDB() {
+        $this->bootstrap("doctrine");
+    }
 
     /**
      * Setup logging
