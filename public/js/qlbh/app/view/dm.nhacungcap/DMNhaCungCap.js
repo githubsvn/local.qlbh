@@ -1,4 +1,4 @@
-var isAddNewNcc = 0;
+sovar isAddNewNcc = 0;
 //Defined object DMNhaCungCap
 function DMNhaCungCap() {
 
@@ -8,7 +8,9 @@ function DMNhaCungCap() {
         root: 'rows',
         idProperty: 'id',
         totalProperty: 'count',
+        //remoteSort: true,
         fields: ['id', 'ten', 'diachi', 'dienthoai', 'fax', 'mst', 'tk_ten', 'tk_sotk', 'tk_nganhang', 'tk_diachi_nganhang']
+
     });
 
     //Khai báo menu top phía trên trong window nhà cung cấp
