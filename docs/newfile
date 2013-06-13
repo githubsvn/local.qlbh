@@ -1,0 +1,5 @@
+mtx_acl_module : module
+mtx_acl_resource: controller
+mtx_acl_privilege: action
+mtx_acl_role: role
+mtx_acl_role_privilege: role nao co quyen truy cap action nao. them data trong table mtx_acl_role va mtx_acl_privilege

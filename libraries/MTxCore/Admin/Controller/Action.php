@@ -8,7 +8,6 @@ abstract class MTxCore_Admin_Controller_Action extends Zend_Controller_Action {
     public function init() {
         $this->_request = $this->getRequest();
 
-        /*
         // check login
         $auth = Zend_Auth::getInstance();
         $data = $auth->getStorage('Administrator')->read();
@@ -26,8 +25,7 @@ abstract class MTxCore_Admin_Controller_Action extends Zend_Controller_Action {
             }
             $this->view->assign('userProfile', $data);
         }
-        */
-        
+
         $this->_helper->layout->setLayout('admin_master');
         $config = Zend_Registry::get('configuration');
 
@@ -126,6 +124,14 @@ abstract class MTxCore_Admin_Controller_Action extends Zend_Controller_Action {
                 }
             }
         }
+    }
+    
+    /**
+     * Disable layout
+     */
+    protected function disableLayout() {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
     }
 
 }

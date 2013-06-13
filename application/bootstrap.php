@@ -1,4 +1,5 @@
 <?php
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     protected $_frontController;
@@ -16,6 +17,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // Add autoloader empty namespace
         $moduleLoader = new Zend_Application_Module_Autoloader(array('namespace' => '', 'basePath' => APP_PATH));
 
+        //Load form admin
+        if (file_exists(dirname(__FILE__) . '/modules/admin')) {
+            $resourceLoader = new Zend_Application_Module_Autoloader(
+                            array(
+                                'namespace' => 'Admin',
+                                'basePath' => dirname(__FILE__) . '/modules/admin',
+                                'resourceTypes' => array(
+                                    'form' => array('path' => 'forms/', 'namespace' => 'Forms')
+                            ))
+            );
+        }
         /**
          * Auto load for Entity
          */
@@ -34,7 +46,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     //protected function _initDB() {
-        //$this->bootstrap("doctrine");
+    //$this->bootstrap("doctrine");
     //}
 
     /**
@@ -43,7 +55,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initHelpers() {
-
+        
     }
 
     /**
@@ -94,7 +106,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initPlugins() {
-
+        
     }
 
     /**
@@ -103,7 +115,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initRoutes() {
-
+        
     }
 
     /**
@@ -112,7 +124,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
      * @return void
      */
     protected function _initControllers() {
-
+        
     }
 
     /**
@@ -161,7 +173,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             //$this->frontController->setBaseUrl('/sub-folder');
             $this->_frontController->dispatch();
         } catch (Exception $e) {
-            echo $e->getMessage();die;
+            echo $e->getMessage();
+            die;
             $logger = Zend_Registry::get('logger');
             $request = $this->_frontController->getRequest();
             $params = $request->getParams();

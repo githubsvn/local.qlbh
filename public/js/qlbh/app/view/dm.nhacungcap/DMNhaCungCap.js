@@ -1,4 +1,4 @@
-sovar isAddNewNcc = 0;
+var isAddNewNcc = 0;
 //Defined object DMNhaCungCap
 function DMNhaCungCap() {
 
@@ -8,9 +8,12 @@ function DMNhaCungCap() {
         root: 'rows',
         idProperty: 'id',
         totalProperty: 'count',
-        //remoteSort: true,
+        remoteSort: true,
+        sortInfo: {
+            field: "id", 
+            direction: "DESC"
+        },
         fields: ['id', 'ten', 'diachi', 'dienthoai', 'fax', 'mst', 'tk_ten', 'tk_sotk', 'tk_nganhang', 'tk_diachi_nganhang']
-
     });
 
     //Khai báo menu top phía trên trong window nhà cung cấp
@@ -18,23 +21,37 @@ function DMNhaCungCap() {
         xtype: 'toolbar',
         items: [{
             xtype: 'button',
+            id: 'btnThemMoi',
             text: 'Thêm Mới',
             icon: 'images/icons/16/add.png',
             handler: function() {
-               var utility = new UtilitiDMNhaCungCap();
-               utility.clearValueFieldForm();
+                var utility = new UtilitiDMNhaCungCap();
+                utility.clearValueFieldForm();
+                utility.disableToolbarButton(true);
             }
         }, '-', {
             xtype: 'button',
             text: 'Chỉnh Sửa',
-            icon: 'images/icons/16/edit.png'
+            id: 'btnChinhSua',
+            icon: 'images/icons/16/edit.png',
+            handler: function() {
+                var utility = new UtilitiDMNhaCungCap();
+                utility.disableFieldsForm(false);
+                utility.disableToolbarButton(true);
+            }
         }, '-', {
             xtype: 'button',
+            id: 'btnXoa',
             text: 'Xóa',
-            icon: 'images/icons/16/delete.png'
+            icon: 'images/icons/16/delete.png',
+            handler: function() {
+                var u = new UtilitiDMNhaCungCap();
+                u.deleteSelectionRow();
+            } //end handler Xoa
         }, '-', {
             xtype: 'button',
             text: 'In',
+            id: 'btnIn',
             icon: 'images/icons/16/print.png',
             handler: function() {
             }
@@ -44,8 +61,19 @@ function DMNhaCungCap() {
             id: 'btnKetThuc',
             icon: 'images/icons/16/home.png',
             handler: function() {
-                var mainWindowDMNcc = Ext.getCmp('mainWindowDMNcc');
-                mainWindowDMNcc.close();
+                Ext.Msg.show({
+                    title: 'Cảnh Báo', 
+                    buttons: Ext.MessageBox.YESNO,
+                    msg: 'Bạn có chắc muốn đóng form này?',
+                    icon: Ext.MessageBox.WARNING,
+                    fn: function(btn){
+                        if (btn == 'yes'){
+                            var mainWindowDMNcc = Ext.getCmp('mainWindowDMNcc');
+                            mainWindowDMNcc.close();
+                        }
+                    }
+                });
+                
             }
         }]
     }; //Kết thúc khai báo menu top
@@ -75,6 +103,18 @@ function DMNhaCungCap() {
             header: "Fax",
             dataIndex: 'fax',
             sortable: true
+        }, {
+            header: "Tên Tài Khoản",
+            dataIndex: 'tk_ten'
+        }, {
+            header: "Sô Tài Khoản",
+            dataIndex: 'tk_sotk'
+        }, {
+            header: "Ngân Hàng",
+            dataIndex: 'tk_sotk'
+        }, {
+            header: "Địa Chỉ NH",
+            dataIndex: 'tk_diachi_nganhang'
         }
         ],
         sm: new Ext.grid.RowSelectionModel({
@@ -112,6 +152,7 @@ function DMNhaCungCap() {
         border: false,
         id: 'frmNcc',
         bodyStyle:'padding:5px;font-family:Arial;font-size:10pt;',
+        url: '/admin/ncc/add',
         items: [{
             xtype: 'hidden',
             name: 'id'
@@ -170,13 +211,34 @@ function DMNhaCungCap() {
             id: 'btnLuu',
             icon: 'images/icons/16/save.png',
             handler: function(){
+                var utility = new UtilitiDMNhaCungCap();
                 var frmNcc = Ext.getCmp('frmNcc');
+                Ext.MessageBox.wait(
+                    'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
+                    'Thông Báo' 
+                    );
                 frmNcc.getForm().submit({
-                    success: function(f,a){
-                        Ext.Msg.alert('Success', 'It worked');
+                    //waitMsg : 'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
+                    success: function(f, a){
+                        utility.disableToolbarButton(false);
+                        var utilitiDMNhaCungCap = new UtilitiDMNhaCungCap();
+                        utilitiDMNhaCungCap.reloadGridAfterSaving();
+                        Ext.MessageBox.hide();
+                        Ext.Msg.show({
+                            title      : 'Thông Báo',
+                            msg        : 'Thao tác thành công.',
+                            buttons    : Ext.MessageBox.OK,
+                            icon       : Ext.MessageBox.INFO
+                        })
                     },
                     failure: function(f,a){
-                        Ext.Msg.alert('Warning', 'It fail');
+                        utility.disableToolbarButton(false);
+                        Ext.Msg.show({
+                            title      : 'Thông Báo',
+                            msg        : 'Thao tác không thành công.',
+                            buttons    : Ext.MessageBox.OK,
+                            icon       : Ext.MessageBox.ERROR
+                        })
                     }
                 });
             }
@@ -234,7 +296,7 @@ function DMNhaCungCap() {
             gridDMNcc.getSelectionModel().selectFirstRow();
         }
     });
-
+    
     this.loadDataFormDbForGrid = function () {
         //Load data cho gird
         this.storeListNcc.load({
@@ -284,4 +346,75 @@ function UtilitiDMNhaCungCap() {
             itm.setValue('');
         });
     }
+    
+    //Refesh lại grid sau khi save data
+    this.reloadGridAfterSaving = function() {
+        var gridDMNcc = Ext.getCmp("gridDMNcc");
+        gridDMNcc.getStore().reload();
+    }
+    
+    //Xóa mẫu tin hiện tại đang chọn.
+    //Vì sao ta phải xóa trong đây mà không phải trong handler của button Xóa
+    //Bởi vì, Ta muốn show message để xát nhận là muốn xóa hay không nhưng message này là dạng popup
+    //nên nó không ngừng lại để ta xát nhận mà nó sẽ chạy luôn và kết thúc hàm này
+    this.deleteSelectionRow = function() {
+        var gridDMNcc = Ext.getCmp("gridDMNcc");
+        var sm = gridDMNcc.getSelectionModel();
+        var sel = sm.getSelected();
+        if (sm.hasSelection()){
+            Ext.Msg.show({
+                title: 'Cảnh Báo', 
+                buttons: Ext.MessageBox.YESNO,
+                msg: 'Bạn có chắc muốn xóa mẫu tin này?',
+                icon: Ext.MessageBox.WARNING,
+                fn: function(btn){
+                    if (btn == 'yes'){
+                        id = sel.data.id;
+                        Ext.MessageBox.wait(
+                            'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
+                            'Thông Báo' 
+                            );
+                        if (id > 0) {
+                            Ext.Ajax.request({
+                                url: 'admin/ncc/delete/id/' + id,
+                                success: function(response, opts) {
+                                    Ext.MessageBox.hide();
+                                    Ext.Msg.show({
+                                        title      : 'Thông Báo',
+                                        msg        : 'Đã xóa mẫu tin thành công.',
+                                        buttons    : Ext.MessageBox.OK,
+                                        icon       : Ext.MessageBox.INFO
+                                    });
+                                    gridDMNcc.getStore().remove(sel);
+                                },
+                                failure: function(response, opts) {
+                                    Ext.Msg.show({
+                                        title      : 'Thông Báo',
+                                        msg        : 'Đã xóa mẫu tin thành công.',
+                                        buttons    : Ext.MessageBox.OK,
+                                        icon       : Ext.MessageBox.ERROR
+                                    })
+                                }
+                            });
+                        }
+                        
+                    }
+                }
+            });
+        }
+    }
+    
+    this.disableToolbarButton = function(v) {
+        var arrayButton = Array();
+        arrayButton[0] = "btnThemMoi";
+        arrayButton[1] = "btnChinhSua";
+        arrayButton[2] = "btnXoa";
+        arrayButton[3] = "btnIn";
+        for (var i = 0; i < arrayButton.length; i ++) {
+            var nameBtn = arrayButton[i]
+            var btnLuu = Ext.getCmp(nameBtn);
+            btnLuu.disabled = v;
+        }
+    };
+    
 } //end UtilitiDMNhaCungCap
