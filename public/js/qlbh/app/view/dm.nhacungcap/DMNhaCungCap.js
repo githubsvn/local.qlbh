@@ -122,7 +122,7 @@ function DMNhaCungCap() {
             //và sẽ gán giá trị vào form
             singleSelect: true,
             listeners: {
-                rowselect: {
+                'rowselect': {
                     fn: function(sm, index, record) {
                         var frmNcc = Ext.getCmp("frmNcc");
                         frmNcc.getForm().loadRecord(record);
@@ -132,6 +132,16 @@ function DMNhaCungCap() {
                 }
             }
         }),
+        listeners: {
+            'rowdblclick': {
+                fn: function(grid, index, rec) {
+                    var utility = new UtilitiDMNhaCungCap();
+                    utility.disableFieldsForm(false);
+                    utility.disableToolbarButton(true);
+                    utility.focusForm();
+                }
+            }
+        },
         autoHeight: true,
         enableColumnMove: false,
         columnLines: true,
@@ -404,6 +414,7 @@ function UtilitiDMNhaCungCap() {
         }
     }
     
+    //Khi nhấn vào nút thêm mới, chỉnh sửa chúng ta cần disable nhưng button này đi để chuyên focus cho form
     this.disableToolbarButton = function(v) {
         var arrayButton = Array();
         arrayButton[0] = "btnThemMoi";
@@ -417,4 +428,7 @@ function UtilitiDMNhaCungCap() {
         }
     };
     
+    this.focusForm = function() {
+        Ext.get("ten").focus();
+    }
 } //end UtilitiDMNhaCungCap
