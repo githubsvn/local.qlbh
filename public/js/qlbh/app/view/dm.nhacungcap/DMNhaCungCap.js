@@ -10,7 +10,7 @@ function DMNhaCungCap() {
         totalProperty: 'count',
         remoteSort: true,
         sortInfo: {
-            field: "id", 
+            field: "id",
             direction: "DESC"
         },
         fields: ['id', 'ten', 'diachi', 'dienthoai', 'fax', 'mst', 'tk_ten', 'tk_sotk', 'tk_nganhang', 'tk_diachi_nganhang']
@@ -28,6 +28,7 @@ function DMNhaCungCap() {
                 var utility = new UtilitiDMNhaCungCap();
                 utility.clearValueFieldForm();
                 utility.disableToolbarButton(true);
+                utility.setFocusForm();
             }
         }, '-', {
             xtype: 'button',
@@ -38,6 +39,7 @@ function DMNhaCungCap() {
                 var utility = new UtilitiDMNhaCungCap();
                 utility.disableFieldsForm(false);
                 utility.disableToolbarButton(true);
+                utility.setFocusForm();
             }
         }, '-', {
             xtype: 'button',
@@ -62,7 +64,7 @@ function DMNhaCungCap() {
             icon: 'images/icons/16/home.png',
             handler: function() {
                 Ext.Msg.show({
-                    title: 'Cảnh Báo', 
+                    title: 'Cảnh Báo',
                     buttons: Ext.MessageBox.YESNO,
                     msg: 'Bạn có chắc muốn đóng form này?',
                     icon: Ext.MessageBox.WARNING,
@@ -73,7 +75,7 @@ function DMNhaCungCap() {
                         }
                     }
                 });
-                
+
             }
         }]
     }; //Kết thúc khai báo menu top
@@ -128,6 +130,7 @@ function DMNhaCungCap() {
                         frmNcc.getForm().loadRecord(record);
                         var utility = new UtilitiDMNhaCungCap();
                         utility.disableFieldsForm(true);
+                        utility.disableToolbarButton(false);
                     }
                 }
             }
@@ -138,7 +141,7 @@ function DMNhaCungCap() {
                     var utility = new UtilitiDMNhaCungCap();
                     utility.disableFieldsForm(false);
                     utility.disableToolbarButton(true);
-                    utility.focusForm();
+                    utility.setFocusForm();
                 }
             }
         },
@@ -170,6 +173,7 @@ function DMNhaCungCap() {
             xtype: 'textfield',
             fieldLabel: 'Tên',
             name: 'ten',
+            id: 'ten',
             anchor: '100%',
             allowBlank: false
         }, {
@@ -225,7 +229,7 @@ function DMNhaCungCap() {
                 var frmNcc = Ext.getCmp('frmNcc');
                 Ext.MessageBox.wait(
                     'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
-                    'Thông Báo' 
+                    'Thông Báo'
                     );
                 frmNcc.getForm().submit({
                     //waitMsg : 'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
@@ -306,7 +310,7 @@ function DMNhaCungCap() {
             gridDMNcc.getSelectionModel().selectFirstRow();
         }
     });
-    
+
     this.loadDataFormDbForGrid = function () {
         //Load data cho gird
         this.storeListNcc.load({
@@ -356,13 +360,13 @@ function UtilitiDMNhaCungCap() {
             itm.setValue('');
         });
     }
-    
+
     //Refesh lại grid sau khi save data
     this.reloadGridAfterSaving = function() {
         var gridDMNcc = Ext.getCmp("gridDMNcc");
         gridDMNcc.getStore().reload();
     }
-    
+
     //Xóa mẫu tin hiện tại đang chọn.
     //Vì sao ta phải xóa trong đây mà không phải trong handler của button Xóa
     //Bởi vì, Ta muốn show message để xát nhận là muốn xóa hay không nhưng message này là dạng popup
@@ -373,7 +377,7 @@ function UtilitiDMNhaCungCap() {
         var sel = sm.getSelected();
         if (sm.hasSelection()){
             Ext.Msg.show({
-                title: 'Cảnh Báo', 
+                title: 'Cảnh Báo',
                 buttons: Ext.MessageBox.YESNO,
                 msg: 'Bạn có chắc muốn xóa mẫu tin này?',
                 icon: Ext.MessageBox.WARNING,
@@ -382,7 +386,7 @@ function UtilitiDMNhaCungCap() {
                         id = sel.data.id;
                         Ext.MessageBox.wait(
                             'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
-                            'Thông Báo' 
+                            'Thông Báo'
                             );
                         if (id > 0) {
                             Ext.Ajax.request({
@@ -396,6 +400,11 @@ function UtilitiDMNhaCungCap() {
                                         icon       : Ext.MessageBox.INFO
                                     });
                                     gridDMNcc.getStore().remove(sel);
+
+                                    //Set selection for first item
+                                    if (gridDMNcc.getStore().data.length > 0) {
+                                        gridDMNcc.getSelectionModel().selectFirstRow();
+                                    }
                                 },
                                 failure: function(response, opts) {
                                     Ext.Msg.show({
@@ -407,13 +416,13 @@ function UtilitiDMNhaCungCap() {
                                 }
                             });
                         }
-                        
+
                     }
                 }
             });
         }
     }
-    
+
     //Khi nhấn vào nút thêm mới, chỉnh sửa chúng ta cần disable nhưng button này đi để chuyên focus cho form
     this.disableToolbarButton = function(v) {
         var arrayButton = Array();
@@ -427,8 +436,9 @@ function UtilitiDMNhaCungCap() {
             btnLuu.disabled = v;
         }
     };
-    
-    this.focusForm = function() {
-        Ext.get("ten").focus();
+
+    //set focus cho trường ten trên form
+    this.setFocusForm = function() {
+        Ext.getCmp("ten").focus(false, 200);
     }
 } //end UtilitiDMNhaCungCap
