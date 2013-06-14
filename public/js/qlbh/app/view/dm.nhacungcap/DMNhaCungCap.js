@@ -63,19 +63,8 @@ function DMNhaCungCap() {
             id: 'btnKetThuc',
             icon: 'images/icons/16/home.png',
             handler: function() {
-                Ext.Msg.show({
-                    title: 'Cảnh Báo',
-                    buttons: Ext.MessageBox.YESNO,
-                    msg: 'Bạn có chắc muốn đóng form này?',
-                    icon: Ext.MessageBox.WARNING,
-                    fn: function(btn){
-                        if (btn == 'yes'){
-                            var mainWindowDMNcc = Ext.getCmp('mainWindowDMNcc');
-                            mainWindowDMNcc.close();
-                        }
-                    }
-                });
-
+                var utility = new UtilitiDMNhaCungCap();
+                utility.closeWindow();
             }
         }]
     }; //Kết thúc khai báo menu top
@@ -145,6 +134,26 @@ function DMNhaCungCap() {
                 }
             }
         },
+        keys: [
+        {
+            key: [46, 13],
+            fn: function(key,e){
+                var utility = new UtilitiDMNhaCungCap();
+                if (key === 46) { //Người dùng vừa nhấn DELETE trên bàn phím
+                    utility.deleteSelectionRow();
+                }
+                
+                if (key == 13) { //Người dùng vừa nhấn ENTER trên bàn phím
+                    utility.disableFieldsForm(false);
+                    utility.disableToolbarButton(true);
+                    utility.setFocusForm();
+                }
+                
+            },
+            ctrl:false,
+            stopEvent:true
+        }
+        ],
         autoHeight: true,
         enableColumnMove: false,
         columnLines: true,
@@ -279,6 +288,11 @@ function DMNhaCungCap() {
             height: h,
             layout: 'border',
             border: false,
+            closable: false,
+            onEsc: function() {
+                var utility = new UtilitiDMNhaCungCap();
+                utility.closeWindow();
+            },
             items: [
             {
                 //Menu top phia tren
@@ -287,12 +301,23 @@ function DMNhaCungCap() {
             },{
                 //Form ben trai
                 region: 'east',
+                id: 'panelLeft',
                 title: 'Thông tin chi tiết',
                 split: true,
                 collapsed: false,
                 collapsible: true,
                 collapseMode: 'mini',
                 width: 400,
+                listeners: {
+                    expand: function() { //Sự kiện Mở rộng form bên trái
+                        var utility = new UtilitiDMNhaCungCap();
+                        utility.setWidthForBbarGrid(2);
+                    },
+                    collapse: function() { //Sự kiện Thu nhỏ form bên trái
+                        var utility = new UtilitiDMNhaCungCap();
+                        utility.setWidthForBbarGrid(1);
+                    }
+                },
                 items: [this.frmNcc]
             }, {
                 //Vung luoi o giua
@@ -325,6 +350,7 @@ function DMNhaCungCap() {
     this.showMainWindow = function(w, h) {
         var mainWindow = this.createMainWindow(w, h);
         mainWindow.show();
+
         //Load data
         this.loadDataFormDbForGrid();
         var utiliti = new UtilitiDMNhaCungCap();
@@ -440,5 +466,38 @@ function UtilitiDMNhaCungCap() {
     //set focus cho trường ten trên form
     this.setFocusForm = function() {
         Ext.getCmp("ten").focus(false, 200);
+    }
+    
+    //Đóng cửa form Nhà Cung Cấp
+    this.closeWindow = function() {
+        Ext.Msg.show({
+            title: 'Cảnh Báo',
+            buttons: Ext.MessageBox.YESNO,
+            msg: 'Bạn có chắc muốn đóng form này?',
+            icon: Ext.MessageBox.WARNING,
+            fn: function(btn){
+                if (btn == 'yes'){
+                    var mainWindowDMNcc = Ext.getCmp('mainWindowDMNcc');
+                    mainWindowDMNcc.close();
+                }
+            }
+        });
+    }
+    
+    //Thay đổi độ rộng cho bbar của grid
+    //type = 1 là khi thu nhỏ form bên trái
+    //type = 2 là mở rộng form bên trái
+    this.setWidthForBbarGrid = function(type) {
+        var gridDMNcc = Ext.getCmp("gridDMNcc");
+        var panelLeft = Ext.getCmp("panelLeft");
+        var wG = gridDMNcc.getWidth();
+        var wP = panelLeft.getWidth();
+        if (type == 1) {
+            w = wG;
+        } else if (type == 2) {
+            w = wG - wP;
+        }
+        gridDMNcc.bbar.setWidth(w)
+        gridDMNcc.getBottomToolbar().setWidth(w);
     }
 } //end UtilitiDMNhaCungCap
