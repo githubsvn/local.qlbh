@@ -43,6 +43,9 @@ class Admin_NccController extends MTxCore_Admin_Controller_Action
         die;
     }
     
+    /**
+     * Delete nha cung cap
+     */
     public function deleteAction()
     {
         $this->disableLayout();

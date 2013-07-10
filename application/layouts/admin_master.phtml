@@ -9,14 +9,18 @@
 
         <!--Config global-->
         <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/config/global.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/config/lang.js') ?>
 
         <!--DM Nganh Hang-->
         <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/view/dm.nganhhang/DMNganhHang.js') ?>
+        
         <!--DM Nha Cung Cap-->
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/view/dm.nhacungcap/lang.js') ?>
         <?php $this->headScript()->appendFile($this->baseUrl() . '/js/qlbh/app/view/dm.nhacungcap/DMNhaCungCap.js') ?>
 
         <?php echo $this->headScript(); ?>
         <?php $this->headLink()->prependStylesheet($this->baseUrl() . '/js/extjs3/resources/css/ext-all.css'); ?>
+        <?php $this->headLink()->prependStylesheet($this->baseUrl() . '/css/custom_extjs.css'); ?>
         <?php echo $this->headLink(); ?>
     </head>
     <body>

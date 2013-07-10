@@ -22,7 +22,7 @@ function DMNhaCungCap() {
         items: [{
             xtype: 'button',
             id: 'btnThemMoi',
-            text: 'Thêm Mới',
+            text: lang_global_btnThemMoi, //Thêm Mới
             icon: 'images/icons/16/add.png',
             handler: function() {
                 var utility = new UtilitiDMNhaCungCap();
@@ -32,7 +32,7 @@ function DMNhaCungCap() {
             }
         }, '-', {
             xtype: 'button',
-            text: 'Chỉnh Sửa',
+            text: lang_global_btnChinhSua,
             id: 'btnChinhSua',
             icon: 'images/icons/16/edit.png',
             handler: function() {
@@ -44,7 +44,7 @@ function DMNhaCungCap() {
         }, '-', {
             xtype: 'button',
             id: 'btnXoa',
-            text: 'Xóa',
+            text: lang_global_btnXoa,
             icon: 'images/icons/16/delete.png',
             handler: function() {
                 var u = new UtilitiDMNhaCungCap();
@@ -52,14 +52,14 @@ function DMNhaCungCap() {
             } //end handler Xoa
         }, '-', {
             xtype: 'button',
-            text: 'In',
+            text: lang_global_btnIn,
             id: 'btnIn',
             icon: 'images/icons/16/print.png',
             handler: function() {
             }
         }, '-', {
             xtype: 'button',
-            text: 'Kết Thúc',
+            text: lang_global_btnKetThuc,
             id: 'btnKetThuc',
             icon: 'images/icons/16/home.png',
             handler: function() {
@@ -76,35 +76,35 @@ function DMNhaCungCap() {
         border: false,
         columns: [
         {
-            header: "Tên",
+            header: lang_ten,
             dataIndex: 'ten',
             width: 250,
             sortable: true
         }, {
-            header: "Địa Chỉ",
+            header: lang_diachi,
             dataIndex: 'diachi',
             width: 350,
             sortable: true
         }, {
-            header: "Điện Thoại",
+            header: lang_dienthoai,
             dataIndex: 'dienthoai',
             width: 160,
             sortable: true
         }, {
-            header: "Fax",
+            header: lang_fax,
             dataIndex: 'fax',
             sortable: true
         }, {
-            header: "Tên Tài Khoản",
+            header: lang_tentaikhoan,
             dataIndex: 'tk_ten'
         }, {
-            header: "Sô Tài Khoản",
+            header: lang_sotaikhoan,
             dataIndex: 'tk_sotk'
         }, {
-            header: "Ngân Hàng",
+            header: lang_nganhang,
             dataIndex: 'tk_sotk'
         }, {
-            header: "Địa Chỉ NH",
+            header: lang_diachinganhang,
             dataIndex: 'tk_diachi_nganhang'
         }
         ],
@@ -163,8 +163,8 @@ function DMNhaCungCap() {
             pageSize: pageSize,
             store: this.storeListNcc,
             displayInfo: true,
-            displayMsg: 'Hiện thị {0} - {1} trong tổng số {2} mẫu tin.',
-            emptyMsg: "Không tồn tại mẫu tin nào."
+            displayMsg: lang_global_grid_bbar_HienThi + ' {0} - {1} ' + lang_global_grid_bbar_TrongTongSo + ' {2} ' + lang_global_grid_bbar_MauTin,
+            emptyMsg: lang_global_grid_khong_ton_tai_mau_tin_nao
         })
     }; //Kết thúc khai báo grid nhà cung cấp
 
@@ -180,65 +180,65 @@ function DMNhaCungCap() {
             name: 'id'
         },{
             xtype: 'textfield',
-            fieldLabel: 'Tên',
+            fieldLabel: lang_ten,
             name: 'ten',
             id: 'ten',
             anchor: '100%',
             allowBlank: false
         }, {
             xtype: 'textfield',
-            fieldLabel: 'Mã Số Thuế',
+            fieldLabel: lang_masothue,
             name: 'mst',
             anchor: '100%'
         }, {
             xtype: 'textfield',
-            fieldLabel: 'Địa Chỉ',
+            fieldLabel: lang_diachi,
             name: 'diachi',
             anchor: '100%'
         }, {
             xtype: 'textfield',
-            fieldLabel: 'Điện Thoại',
+            fieldLabel: lang_dienthoai,
             name: 'dienthoai',
             anchor: '100%'
         }, {
             xtype: 'textfield',
-            fieldLabel: 'Fax',
+            fieldLabel: lang_fax,
             name: 'fax',
             anchor: '100%'
         }, {
             xtype: 'fieldset',
             defaultType: 'textfield',
-            title: 'Thông tin tài khoản',
+            title: lang_thong_tin_tai_khoan,
             items: [
             {
-                fieldLabel: 'Tên tài khoản',
+                fieldLabel: lang_tentaikhoan,
                 name: 'tk_ten',
                 anchor: '100%'
             }, {
-                fieldLabel: 'Số tài khoản',
+                fieldLabel: lang_sotaikhoan,
                 name: 'tk_sotk',
                 anchor: '100%'
             }, {
-                fieldLabel: 'Ngân hàng',
+                fieldLabel: lang_nganhang,
                 name: 'tk_nganhang',
                 anchor: '100%'
             }, {
-                fieldLabel: 'Địa chỉ',
+                fieldLabel: lang_diachinganhang,
                 name: 'tk_diachi_nganhang',
                 anchor: '100%'
             }
             ]
         }],//xtype form
         buttons: [{
-            text: 'Lưu',
+            text: lang_global_btnLuu,
             id: 'btnLuu',
             icon: 'images/icons/16/save.png',
             handler: function(){
                 var utility = new UtilitiDMNhaCungCap();
                 var frmNcc = Ext.getCmp('frmNcc');
                 Ext.MessageBox.wait(
-                    'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
-                    'Thông Báo'
+                    lang_global_he_thong_dang_xu_ly_xin_vui_long_doi_trong_giay_lat,
+                    lang_global_thong_bao
                     );
                 frmNcc.getForm().submit({
                     //waitMsg : 'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
@@ -248,8 +248,8 @@ function DMNhaCungCap() {
                         utilitiDMNhaCungCap.reloadGridAfterSaving();
                         Ext.MessageBox.hide();
                         Ext.Msg.show({
-                            title      : 'Thông Báo',
-                            msg        : 'Thao tác thành công.',
+                            title      : lang_global_thong_bao,
+                            msg        : lang_global_thao_tac_thanh_cong,
                             buttons    : Ext.MessageBox.OK,
                             icon       : Ext.MessageBox.INFO
                         })
@@ -257,8 +257,8 @@ function DMNhaCungCap() {
                     failure: function(f,a){
                         utility.disableToolbarButton(false);
                         Ext.Msg.show({
-                            title      : 'Thông Báo',
-                            msg        : 'Thao tác không thành công.',
+                            title      : lang_global_thong_bao,
+                            msg        : lang_global_thao_tac_khong_thanh_cong,
                             buttons    : Ext.MessageBox.OK,
                             icon       : Ext.MessageBox.ERROR
                         })
@@ -266,7 +266,7 @@ function DMNhaCungCap() {
                 });
             }
         }, {
-            text: 'Làm lại',
+            text: lang_global_btnLamLai,
             id: 'btnLamLai',
             icon: 'images/icons/16/refesh.png',
             handler: function(){
@@ -280,7 +280,7 @@ function DMNhaCungCap() {
     //Create main window for DM Nha Cung Cap
     this.createMainWindow = function(w, h) {
         return new Ext.Window({
-            title: "DANH SÁCH NHÀ CUNG CẤP",
+            title: lang_danh_sach_nha_cung_cap,
             id: 'mainWindowDMNcc',
             draggable: false,
             resizable: false,
@@ -302,7 +302,7 @@ function DMNhaCungCap() {
                 //Form ben trai
                 region: 'east',
                 id: 'panelLeft',
-                title: 'Thông tin chi tiết',
+                title: lang_thong_tin_chi_tiet,
                 split: true,
                 collapsed: false,
                 collapsible: true,
@@ -403,16 +403,16 @@ function UtilitiDMNhaCungCap() {
         var sel = sm.getSelected();
         if (sm.hasSelection()){
             Ext.Msg.show({
-                title: 'Cảnh Báo',
+                title: lang_global_canh_bao,
                 buttons: Ext.MessageBox.YESNO,
-                msg: 'Bạn có chắc muốn xóa mẫu tin này?',
+                msg: lang_global_ban_co_chac_muon_xoa_mau_tin_nay_khong,
                 icon: Ext.MessageBox.WARNING,
                 fn: function(btn){
                     if (btn == 'yes'){
                         id = sel.data.id;
                         Ext.MessageBox.wait(
-                            'Hệ thống đang xữ lý xin vui lòng đợi trong giây lát.',
-                            'Thông Báo'
+                            lang_global_he_thong_dang_xu_ly_xin_vui_long_doi_trong_giay_lat,
+                            lang_global_thong_bao
                             );
                         if (id > 0) {
                             Ext.Ajax.request({
@@ -420,8 +420,8 @@ function UtilitiDMNhaCungCap() {
                                 success: function(response, opts) {
                                     Ext.MessageBox.hide();
                                     Ext.Msg.show({
-                                        title      : 'Thông Báo',
-                                        msg        : 'Đã xóa mẫu tin thành công.',
+                                        title      : lang_global_thong_bao,
+                                        msg        : lang_global_thao_tac_thanh_cong,
                                         buttons    : Ext.MessageBox.OK,
                                         icon       : Ext.MessageBox.INFO
                                     });
@@ -434,8 +434,8 @@ function UtilitiDMNhaCungCap() {
                                 },
                                 failure: function(response, opts) {
                                     Ext.Msg.show({
-                                        title      : 'Thông Báo',
-                                        msg        : 'Đã xóa mẫu tin thành công.',
+                                        title      : lang_global_thong_bao,
+                                        msg        : lang_global_thao_tac_khong_thanh_cong,
                                         buttons    : Ext.MessageBox.OK,
                                         icon       : Ext.MessageBox.ERROR
                                     })
@@ -471,9 +471,9 @@ function UtilitiDMNhaCungCap() {
     //Đóng cửa form Nhà Cung Cấp
     this.closeWindow = function() {
         Ext.Msg.show({
-            title: 'Cảnh Báo',
+            title: lang_global_canh_bao,
             buttons: Ext.MessageBox.YESNO,
-            msg: 'Bạn có chắc muốn đóng form này?',
+            msg: lang_global_ban_co_chac_muon_dong_form_nay,
             icon: Ext.MessageBox.WARNING,
             fn: function(btn){
                 if (btn == 'yes'){
