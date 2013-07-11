@@ -1,0 +1,1 @@
+var lang_danh_sach_nganh_hang = "DANH SÁCH NGÀNH HÀNG";

@@ -1,4 +1,3 @@
-var isAddNewNcc = 0;
 //Defined object DMNhaCungCap
 function DMNhaCungCap() {
 
@@ -23,7 +22,7 @@ function DMNhaCungCap() {
             xtype: 'button',
             id: 'btnThemMoi',
             text: lang_global_btnThemMoi, //Thêm Mới
-            icon: 'images/icons/16/add.png',
+            icon: '/images/icons/16/add.png',
             handler: function() {
                 var utility = new UtilitiDMNhaCungCap();
                 utility.clearValueFieldForm();
@@ -34,7 +33,7 @@ function DMNhaCungCap() {
             xtype: 'button',
             text: lang_global_btnChinhSua,
             id: 'btnChinhSua',
-            icon: 'images/icons/16/edit.png',
+            icon: '/images/icons/16/edit.png',
             handler: function() {
                 var utility = new UtilitiDMNhaCungCap();
                 utility.disableFieldsForm(false);
@@ -45,7 +44,7 @@ function DMNhaCungCap() {
             xtype: 'button',
             id: 'btnXoa',
             text: lang_global_btnXoa,
-            icon: 'images/icons/16/delete.png',
+            icon: '/images/icons/16/delete.png',
             handler: function() {
                 var u = new UtilitiDMNhaCungCap();
                 u.deleteSelectionRow();
@@ -54,14 +53,15 @@ function DMNhaCungCap() {
             xtype: 'button',
             text: lang_global_btnIn,
             id: 'btnIn',
-            icon: 'images/icons/16/print.png',
+            icon: '/images/icons/16/print.png',
             handler: function() {
+                window.open("http://www.google.com", "google");
             }
         }, '-', {
             xtype: 'button',
             text: lang_global_btnKetThuc,
             id: 'btnKetThuc',
-            icon: 'images/icons/16/home.png',
+            icon: '/images/icons/16/home.png',
             handler: function() {
                 var utility = new UtilitiDMNhaCungCap();
                 utility.closeWindow();
@@ -142,19 +142,20 @@ function DMNhaCungCap() {
                 if (key === 46) { //Người dùng vừa nhấn DELETE trên bàn phím
                     utility.deleteSelectionRow();
                 }
-                
+
                 if (key == 13) { //Người dùng vừa nhấn ENTER trên bàn phím
                     utility.disableFieldsForm(false);
                     utility.disableToolbarButton(true);
                     utility.setFocusForm();
                 }
-                
+
             },
             ctrl:false,
             stopEvent:true
         }
         ],
         autoHeight: true,
+        //height: 700,
         enableColumnMove: false,
         columnLines: true,
         store: this.storeListNcc,
@@ -232,7 +233,7 @@ function DMNhaCungCap() {
         buttons: [{
             text: lang_global_btnLuu,
             id: 'btnLuu',
-            icon: 'images/icons/16/save.png',
+            icon: '/images/icons/16/save.png',
             handler: function(){
                 var utility = new UtilitiDMNhaCungCap();
                 var frmNcc = Ext.getCmp('frmNcc');
@@ -247,12 +248,12 @@ function DMNhaCungCap() {
                         var utilitiDMNhaCungCap = new UtilitiDMNhaCungCap();
                         utilitiDMNhaCungCap.reloadGridAfterSaving();
                         Ext.MessageBox.hide();
-                        Ext.Msg.show({
-                            title      : lang_global_thong_bao,
-                            msg        : lang_global_thao_tac_thanh_cong,
-                            buttons    : Ext.MessageBox.OK,
-                            icon       : Ext.MessageBox.INFO
-                        })
+//                        Ext.Msg.show({
+//                            title      : lang_global_thong_bao,
+//                            msg        : lang_global_thao_tac_thanh_cong,
+//                            buttons    : Ext.MessageBox.OK,
+//                            icon       : Ext.MessageBox.INFO
+//                        })
                     },
                     failure: function(f,a){
                         utility.disableToolbarButton(false);
@@ -268,7 +269,7 @@ function DMNhaCungCap() {
         }, {
             text: lang_global_btnLamLai,
             id: 'btnLamLai',
-            icon: 'images/icons/16/refesh.png',
+            icon: '/images/icons/16/refesh.png',
             handler: function(){
                 var frmNcc = Ext.getCmp('frmNcc');
                 frmNcc.getForm().reset();
@@ -284,6 +285,8 @@ function DMNhaCungCap() {
             id: 'mainWindowDMNcc',
             draggable: false,
             resizable: false,
+            minimizable: false,
+            maximizable: false,
             width: w,
             height: h,
             layout: 'border',
@@ -419,18 +422,16 @@ function UtilitiDMNhaCungCap() {
                                 url: 'admin/ncc/delete/id/' + id,
                                 success: function(response, opts) {
                                     Ext.MessageBox.hide();
-                                    Ext.Msg.show({
-                                        title      : lang_global_thong_bao,
-                                        msg        : lang_global_thao_tac_thanh_cong,
-                                        buttons    : Ext.MessageBox.OK,
-                                        icon       : Ext.MessageBox.INFO
-                                    });
+//                                    Ext.Msg.show({
+//                                        title      : lang_global_thong_bao,
+//                                        msg        : lang_global_thao_tac_thanh_cong,
+//                                        buttons    : Ext.MessageBox.OK,
+//                                        icon       : Ext.MessageBox.INFO
+//                                    });
                                     gridDMNcc.getStore().remove(sel);
 
-                                    //Set selection for first item
-                                    if (gridDMNcc.getStore().data.length > 0) {
-                                        gridDMNcc.getSelectionModel().selectFirstRow();
-                                    }
+                                    gridDMNcc.getStore().reload();
+
                                 },
                                 failure: function(response, opts) {
                                     Ext.Msg.show({
@@ -467,7 +468,7 @@ function UtilitiDMNhaCungCap() {
     this.setFocusForm = function() {
         Ext.getCmp("ten").focus(false, 200);
     }
-    
+
     //Đóng cửa form Nhà Cung Cấp
     this.closeWindow = function() {
         Ext.Msg.show({
@@ -483,7 +484,7 @@ function UtilitiDMNhaCungCap() {
             }
         });
     }
-    
+
     //Thay đổi độ rộng cho bbar của grid
     //type = 1 là khi thu nhỏ form bên trái
     //type = 2 là mở rộng form bên trái

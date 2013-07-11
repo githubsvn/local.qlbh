@@ -18,7 +18,6 @@ abstract class MTxCore_Admin_Controller_Action extends Zend_Controller_Action {
             }
         } else {
             $isPermission = $this->_checkACL($data['id']);
-            $isPermission = true;
             if (!$isPermission) {
                 $urlOptions = array('module' => 'admin', 'controller' => 'auth', 'action' => 'login');
                 $this->_helper->redirector->gotoRoute($urlOptions);
@@ -125,7 +124,7 @@ abstract class MTxCore_Admin_Controller_Action extends Zend_Controller_Action {
             }
         }
     }
-    
+
     /**
      * Disable layout
      */

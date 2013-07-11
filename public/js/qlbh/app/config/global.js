@@ -1,1 +1,1 @@
-var pageSize = 50;
+var pageSize = 30;

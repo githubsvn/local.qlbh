@@ -1,6 +1,6 @@
 <?php
 
-class Admin_NccController extends MTxCore_Admin_Controller_Action
+class Admin_NganhhangController extends MTxCore_Admin_Controller_Action
 {
     /**
      * Get list nha cung cap
@@ -14,7 +14,7 @@ class Admin_NccController extends MTxCore_Admin_Controller_Action
         $sortColumn = $this->getRequest()->getParam('sort', 'id');
         $type = $this->getRequest()->getParam('dir', 'DESC');
 
-        $model = new Model_NhaCungCap();
+        $model = new Model_NganhHang();
         $rst = $model->getList($start, $limit, array(), $sortColumn, $type);
         $total = $model->getTotal();
         echo '{count:'. $total .', rows:' . json_encode($rst) . '}';
@@ -28,8 +28,8 @@ class Admin_NccController extends MTxCore_Admin_Controller_Action
     {
         $this->disableLayout();
         $jsonReponse = array('success' => false, 'msg' => $this->view->translate('Thao tác không thành công. Xin vui lòng kiểm tra lại dữ liệu nhập'));
-        $form = new Admin_Forms_Ncc($this->view);
-        $model = new Model_NhaCungCap();
+        $form = new Admin_Forms_Nganhhang($this->view);
+        $model = new Model_NganhHang();
         $params = $this->_request->getParams();
         if ($this->_request->isPost()) {
             if ($form->isValid($params)) {
@@ -52,7 +52,7 @@ class Admin_NccController extends MTxCore_Admin_Controller_Action
         $jsonReponse = array('success' => false, 'msg' => $this->view->translate('Thao tác không thành công. Xin vui lòng kiểm tra lại dữ liệu nhập'));
         $id = $this->_request->getParam('id', 0);
         if ($id) {
-            $model = new Model_NhaCungCap();
+            $model = new Model_NganhHang();
             $rst = $model->delete(array($id));
             if ($rst) {
                 $jsonReponse = array('success' => false, 'msg' => $this->view->translate('Đã xóa một mẫu tin.'));
